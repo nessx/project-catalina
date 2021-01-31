@@ -122,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(TAG, "firebaseAuthWithGoogle:" + account.getId());
                 s_preferences.SaveGoogleLoginDetails(account.getId());
                 SharedPreferences sp = getSharedPreferences("GoogleLoginDetails" ,Context.MODE_PRIVATE);
-                s_preferences.getUser();
                 firebaseAuthWithGoogle(account.getIdToken());
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
