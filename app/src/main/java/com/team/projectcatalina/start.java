@@ -30,10 +30,10 @@ public class start extends AppCompatActivity {
     sp_manager s_preferences;
     GoogleSignInClient mGoogleSignInClient;
     Button sign_out;
-    TextView nameTV;
-    TextView emailTV;
-    TextView idTV;
-    ImageView photoIV;
+    TextView name;
+    TextView email;
+    TextView id;
+    ImageView photo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +41,10 @@ public class start extends AppCompatActivity {
         setContentView(R.layout.start);
 
         sign_out = findViewById(R.id.log_out);
-        nameTV = findViewById(R.id.name);
-        emailTV = findViewById(R.id.email);
-        idTV = findViewById(R.id.id);
-        photoIV = findViewById(R.id.photo);
+        name = findViewById(R.id.name);
+        email = findViewById(R.id.email);
+        id = findViewById(R.id.id);
+        photo = findViewById(R.id.photo);
 
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -62,10 +62,10 @@ public class start extends AppCompatActivity {
             String personId = acct.getId();
             Uri personPhoto = acct.getPhotoUrl();
 
-            nameTV.setText("Nombre: "+personName);
-            emailTV.setText("Email: "+personEmail);
-            idTV.setText("ID: "+personId);
-            Glide.with(this).load(personPhoto).into(photoIV);
+            name.setText("Nombre: "+personName);
+            email.setText("Email: "+personEmail);
+            id.setText("ID: "+personId);
+            Glide.with(this).load(personPhoto).into(photo);
         }
 
         sign_out.setOnClickListener(new View.OnClickListener() {
