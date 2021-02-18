@@ -1,16 +1,18 @@
 package com.team.projectcatalina;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Html;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -26,9 +28,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+
+import com.team.projectcatalina.clases.SlideAdapter;
 import com.team.projectcatalina.sp.sp_manager;
-import com.team.projectcatalina.clases.usuario;
-import com.google.android.material.snackbar.Snackbar;
+import com.team.projectcatalina.ui.dashboard.DashboardFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -41,12 +44,30 @@ public class MainActivity extends AppCompatActivity {
     GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
 
+
+    //Slider
+    private ViewPager mSliderViewPager;
+    private LinearLayout mDoLayout;
+    private SlideAdapter sliderAdapter;
+    private TextView[] mDots;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
         s_preferences = new sp_manager(getApplicationContext());
+
+        //SLIDER INITIALATION VARIABLES
+        mSliderViewPager = (ViewPager) findViewById(R.id.ViewPager);
+        mDoLayout = (LinearLayout) findViewById(R.id.LinerLayout);
+        sliderAdapter = new SlideAdapter(this);
+        mSliderViewPager.setAdapter(sliderAdapter);
+        addDotsIndicator(0);
+        mSliderViewPager.addOnPageChangeListener(viewlistener);
+        DisplayMetrics dm =new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        //END
 
         /*
         //test language preferences
@@ -82,10 +103,11 @@ public class MainActivity extends AppCompatActivity {
             gotomenu();
         }
 
+
     }
 
     public void gotomenu(){
-        Intent intent = new Intent (MainActivity.this, start.class);
+        Intent intent = new Intent (MainActivity.this, startmenu.class);
         startActivity(intent);
     }
 
@@ -146,15 +168,48 @@ public class MainActivity extends AppCompatActivity {
                             // If sign in fails, display a message to the user.
                             updateUI(null);
                         }
-                        // ...
                     }
                 });
     }
 
     private void updateUI(FirebaseUser user) {
-        Intent intent = new Intent(MainActivity.this, start.class);
+        Intent intent = new Intent(MainActivity.this, startmenu.class);
         startActivity(intent);
     }
 
+    //SLIDER
+    public void addDotsIndicator(int position){
+        mDots = new TextView[2];
+        mDoLayout.removeAllViews();
 
+        for (int i = 0; i < mDots.length; i++){
+            mDots[i] = new TextView(this);
+            mDots[i].setText(Html.fromHtml("&#8226;"));
+            mDots[i].setTextSize(35);
+            mDots[i].setTextColor(getResources().getColor(R.color.colorTransparentWhite));
+
+            mDoLayout.addView(mDots[i]);
+        }
+
+
+        if (mDots.length > 0){
+            mDots[position].setTextColor(getResources().getColor(R.color.colorWhite));
+        }
+    }
+    ViewPager.OnPageChangeListener viewlistener = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int i, float positionOffset, int positionOffsetPixels) {
+        }
+
+        @Override
+        public void onPageSelected(int i) {
+            addDotsIndicator(i);
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };
+    //END
 }

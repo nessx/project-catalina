@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import androidx.annotation.NonNull;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -23,10 +22,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.team.projectcatalina.sp.sp_manager;
 
-
-import java.net.URI;
-
-public class start extends AppCompatActivity {
+public class startmenu extends AppCompatActivity {
     sp_manager s_preferences;
     GoogleSignInClient mGoogleSignInClient;
     Button sign_out;
@@ -38,7 +34,7 @@ public class start extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.start);
+        setContentView(R.layout.start_menu);
 
         sign_out = findViewById(R.id.log_out);
         name = findViewById(R.id.name);
@@ -55,7 +51,7 @@ public class start extends AppCompatActivity {
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(start.this);
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(startmenu.this);
         if (acct != null) {
             String personName = acct.getDisplayName();
             String personEmail = acct.getEmail();
@@ -84,8 +80,8 @@ public class start extends AppCompatActivity {
                         SharedPreferences sharedPreferences = getSharedPreferences("GoogleLoginDetails", Context.MODE_PRIVATE);
                         sharedPreferences.edit().clear().commit();
 
-                        Toast.makeText(start.this,"Se ha desconectado correctamente!",Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(start.this, MainActivity.class));
+                        Toast.makeText(startmenu.this,"Se ha desconectado correctamente!",Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(startmenu.this, MainActivity.class));
                         finish();
                     }
                 });

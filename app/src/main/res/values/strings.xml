@@ -3,6 +3,10 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_start">start</string>
-    <string name = "server_client_id">ZcDE_Z_J7XSp9C_oFrmGJoPC</string>
+    <string name="server_client_id">ZcDE_Z_J7XSp9C_oFrmGJoPC</string>
     <string name="server_clientid">1009925746309-kkq2ai75dqasv7ng7u30h5kb5ugrr45q.apps.googleusercontent.com</string>
+    <string name="title_activity_menu">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
