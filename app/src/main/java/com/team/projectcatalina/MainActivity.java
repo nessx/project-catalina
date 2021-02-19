@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "TEST";
 
     private static final int RC_SIGN_IN = 101;
-    SignInButton signInButton;
+    public static SignInButton signInButton;
     GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
 
@@ -189,6 +189,12 @@ public class MainActivity extends AppCompatActivity {
             mDots[i].setTextColor(getResources().getColor(R.color.colorTransparentWhite));
 
             mDoLayout.addView(mDots[i]);
+            Log.i("pos", "POSITION:" + position);
+
+            //controlar la posicion del slider para poner visible el btn cuando este en el slider numero 2
+            if (position == 1) {
+                signInButton.setVisibility(View.VISIBLE);
+            }
         }
 
 

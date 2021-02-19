@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "563140285667",
+    "project_id": "project-catalina-1611165372828",
+    "storage_bucket": "project-catalina-1611165372828.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:563140285667:android:77c6631a2c9833778fe1d6",
+        "android_client_info": {
+          "package_name": "com.team.projectcatalina"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "563140285667-a5k7gvgtcaabt8pkoqjugmvcttlraokp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.team.projectcatalina",
+            "certificate_hash": "ad7fdf24386f8687bf5805788ffb175de6fb05a9"
+          }
+        },
+        {
+          "client_id": "563140285667-nl4ss9cj12a7kfq9n13qrf744e9gceoq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9i0uj3EePqsyixreVtO3h-9lW1UJzaA0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "563140285667-nl4ss9cj12a7kfq9n13qrf744e9gceoq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

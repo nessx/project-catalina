@@ -32,15 +32,15 @@
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/signInButton"
-        android:layout_width="203dp"
-        android:layout_height="45dp"
+        android:layout_width="243dp"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.918">
+        app:layout_constraintVertical_bias="0.949">
 
     </com.google.android.gms.common.SignInButton>
 

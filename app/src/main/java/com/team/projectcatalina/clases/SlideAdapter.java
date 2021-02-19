@@ -5,12 +5,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.google.android.gms.common.SignInButton;
+import com.team.projectcatalina.MainActivity;
 import com.team.projectcatalina.R;
 
 public class SlideAdapter extends PagerAdapter {
@@ -28,12 +31,12 @@ public class SlideAdapter extends PagerAdapter {
 
     public String[] slide_heading = {
         "Dudas",
-        "Informacion"
+        "LOGIN"
     };
 
     public String [] slide_descs = {
             "Hola esta es la descripcion de las dudas",
-            "Hola esta es la descripcion de la informacion"
+            "Inicia sesión con tu cuenta de Google para poder disfrutar de nuestros servicios"
 
     };
 
