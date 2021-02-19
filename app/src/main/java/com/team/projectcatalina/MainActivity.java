@@ -31,7 +31,6 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 import com.team.projectcatalina.clases.SlideAdapter;
 import com.team.projectcatalina.sp.sp_manager;
-import com.team.projectcatalina.ui.dashboard.DashboardFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -78,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
         //GOOGLE SING
         //Initializing Views
         signInButton = findViewById(R.id.signInButton);
-
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder (GoogleSignInOptions.DEFAULT_SIGN_IN)

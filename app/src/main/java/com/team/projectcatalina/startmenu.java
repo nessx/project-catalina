@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import androidx.annotation.NonNull;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -20,27 +23,32 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.team.projectcatalina.fragments.*;
 import com.team.projectcatalina.sp.sp_manager;
 
 public class startmenu extends AppCompatActivity {
     sp_manager s_preferences;
     GoogleSignInClient mGoogleSignInClient;
-    Button sign_out;
-    TextView name;
-    TextView email;
-    TextView id;
-    ImageView photo;
+    BottomNavigationView bottomNavigation;
+
+    public static String personName;
+    public static String personEmail;
+    public static String personId;
+    public static Uri personPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_menu);
 
-        sign_out = findViewById(R.id.log_out);
-        name = findViewById(R.id.name);
-        email = findViewById(R.id.email);
-        id = findViewById(R.id.id);
-        photo = findViewById(R.id.photo);
+
+        //nav menu
+        bottomNavigation = findViewById(R.id.bottom_navigation);
+        bottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
+        openFragment(HomeFragment.newInstance("", ""));
+
+        //end
 
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -53,26 +61,14 @@ public class startmenu extends AppCompatActivity {
 
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(startmenu.this);
         if (acct != null) {
-            String personName = acct.getDisplayName();
-            String personEmail = acct.getEmail();
-            String personId = acct.getId();
-            Uri personPhoto = acct.getPhotoUrl();
-
-            name.setText("Nombre: "+personName);
-            email.setText("Email: "+personEmail);
-            id.setText("ID: "+personId);
-            Glide.with(this).load(personPhoto).into(photo);
+            personName = acct.getDisplayName();
+            personEmail = acct.getEmail();
+            personId = acct.getId();
+            personPhoto = acct.getPhotoUrl();
         }
-
-        sign_out.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signOut();
-            }
-        });
     }
 
-    private void signOut() {
+    public void signOut() {
         mGoogleSignInClient.signOut()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
@@ -86,4 +82,29 @@ public class startmenu extends AppCompatActivity {
                     }
                 });
     }
+
+    //bottom menu
+    public void openFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+    BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.navigation_home:
+                            openFragment(HomeFragment.newInstance("", ""));
+                            return true;
+                        case R.id.navigation_sms:
+                            openFragment(SmsFragment.newInstance("", ""));
+                            return true;
+                        case R.id.navigation_notifications:
+                            openFragment(NotificationFragment.newInstance("", ""));
+                            return true;
+                    }
+                    return false;
+                }
+            };
 }
