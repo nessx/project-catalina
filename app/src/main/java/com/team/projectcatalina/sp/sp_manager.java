@@ -50,9 +50,10 @@ public class sp_manager {
         return langnull;
     }
 
-    public String getUser() {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("LoginDetails", Context.MODE_PRIVATE);
-        return sharedPreferences.getString("User", "");
+
+    public void reset() {
+        SharedPreferences login = context.getSharedPreferences("GoogleLoginDetails", Context.MODE_PRIVATE);
+        login.edit().clear().commit();
     }
 
 }

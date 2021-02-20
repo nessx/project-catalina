@@ -57,6 +57,11 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         s_preferences = new sp_manager(getApplicationContext());
 
+        //si el usuario no esta loggeado
+        if (!new sp_manager(this).isUserGoogleLogedOut()) {
+            gotomenu();
+        }
+
         //SLIDER INITIALATION VARIABLES
         mSliderViewPager = (ViewPager) findViewById(R.id.ViewPager);
         mDoLayout = (LinearLayout) findViewById(R.id.LinerLayout);
@@ -93,13 +98,9 @@ public class MainActivity extends AppCompatActivity {
                 signIn();
             }
         });
-
         //END
 
-        //si el usuario no esta loggeado
-        if (!new sp_manager(this).isUserGoogleLogedOut()) {
-            gotomenu();
-        }
+
 
 
     }
@@ -140,8 +141,8 @@ public class MainActivity extends AppCompatActivity {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 Toast.makeText(this,"Loggeado correctamente " + account.getDisplayName(), Toast.LENGTH_SHORT).show();
                 Log.i(TAG, "firebaseAuthWithGoogle:" + account.getId());
-                s_preferences.SaveGoogleLoginDetails(account.getId());
                 SharedPreferences sp = getSharedPreferences("GoogleLoginDetails" ,Context.MODE_PRIVATE);
+                s_preferences.SaveGoogleLoginDetails(account.getId());
                 firebaseAuthWithGoogle(account.getIdToken());
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately

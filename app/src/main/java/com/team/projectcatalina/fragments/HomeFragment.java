@@ -29,12 +29,6 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    Button sign_out;
-    TextView name;
-    TextView email;
-    TextView id;
-    ImageView photo;
-
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -61,25 +55,6 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View HomeFragment = inflater.inflate(R.layout.fragment_home, container, false);
-        sign_out = HomeFragment.findViewById(R.id.log_out);
-        name = HomeFragment.findViewById(R.id.name);
-        email = HomeFragment.findViewById(R.id.email);
-        id = HomeFragment.findViewById(R.id.id);
-        photo = HomeFragment.findViewById(R.id.photo);
-
-        startmenu sm = new startmenu();
-
-        name.setText("Nombre: "+sm.personName);
-        email.setText("Email: "+sm.personEmail);
-        id.setText("ID: "+sm.personId);
-        Glide.with(this).load(sm.personPhoto).into(photo);
-
-        sign_out.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sm.signOut();
-            }
-        });
 
 
         // Inflate the layout for this fragment
