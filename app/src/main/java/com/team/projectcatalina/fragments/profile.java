@@ -108,8 +108,6 @@ public class profile extends Fragment {
             personPhoto = acct.getPhotoUrl();
         }
 
-
-
         name.setText(personName);
         email.setText(personEmail);
         id.setText("Google id: "+personId);

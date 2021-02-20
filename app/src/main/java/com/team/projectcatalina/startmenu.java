@@ -28,7 +28,6 @@ import com.team.projectcatalina.fragments.*;
 import com.team.projectcatalina.sp.sp_manager;
 
 public class startmenu extends AppCompatActivity {
-    sp_manager s_preferences;
     BottomNavigationView bottomNavigation;
 
     @Override

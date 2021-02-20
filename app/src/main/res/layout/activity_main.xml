@@ -9,13 +9,15 @@
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/ViewPager"
-        android:layout_width="408dp"
+        android:layout_width="match_parent"
         android:layout_height="518dp"
+        android:layout_gravity="center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
     </androidx.viewpager.widget.ViewPager>
+
 
     <LinearLayout
         android:id="@+id/LinerLayout"
@@ -27,8 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ViewPager"
-        app:layout_constraintVertical_bias="0.139"></LinearLayout>
-
+        app:layout_constraintVertical_bias="0.182"></LinearLayout>
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/signInButton"
