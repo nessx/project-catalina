@@ -73,11 +73,6 @@ public class HomeFragment extends Fragment {
         Button btn = HomeFragment.findViewById(R.id.button);
         spinnerArray = new ArrayList<>();
 
-        //PERMISION POLICY
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-        //END
-
         ArrayList<Vert> listado = inicializarvert();
         Vert.showverts(listado);
         for(int i=1;i<listado.size();i++){

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.text.Html;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -56,6 +57,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
         s_preferences = new sp_manager(getApplicationContext());
+
+        //PERMISION POLICY
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        //END
 
         //si el usuario no esta loggeado
         if (!new sp_manager(this).isUserGoogleLogedOut()) {
