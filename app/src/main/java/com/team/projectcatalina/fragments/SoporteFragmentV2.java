@@ -7,16 +7,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.team.projectcatalina.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SoporteFragment#newInstance} factory method to
+ * Use the {@link SoporteFragmentV2#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SoporteFragment extends Fragment {
+public class SoporteFragmentV2 extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,7 +26,7 @@ public class SoporteFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public SoporteFragment() {
+    public SoporteFragmentV2() {
         // Required empty public constructor
     }
 
@@ -37,11 +36,11 @@ public class SoporteFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SoporteFragment.
+     * @return A new instance of fragment SoporteFragmentV2.
      */
     // TODO: Rename and change types and number of parameters
-    public static SoporteFragment newInstance(String param1, String param2) {
-        SoporteFragment fragment = new SoporteFragment();
+    public static SoporteFragmentV2 newInstance(String param1, String param2) {
+        SoporteFragmentV2 fragment = new SoporteFragmentV2();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -49,22 +48,19 @@ public class SoporteFragment extends Fragment {
         return fragment;
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View SoporteFragment = inflater.inflate(R.layout.fragment_soporte, container, false);
-        Button BtnReportMetro= SoporteFragment.findViewById(R.id.button);
-        BtnReportMetro.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                GoToSoportev2();
-            }
-        });
-        return SoporteFragment;
+        return inflater.inflate(R.layout.fragment_soporte_v2, container, false);
     }
-    public void GoToSoportev2() {
-        
-    }
-
 }
