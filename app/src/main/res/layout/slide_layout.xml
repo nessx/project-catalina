@@ -27,7 +27,7 @@
         android:fontFamily="sans-serif"
         android:text="HEADING"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="@color/cardview_light_background"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -37,17 +37,19 @@
 
     <TextView
         android:id="@+id/slide_desc"
-        android:layout_width="310dp"
-        android:layout_height="111dp"
+        android:layout_width="337dp"
+        android:layout_height="162dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="13dp"
+        android:fontFamily="sans-serif-smallcaps"
         android:text="Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen."
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.472"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.722" />
+        app:layout_constraintVertical_bias="0.81" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,18 +25,19 @@ public class SlideAdapter extends PagerAdapter {
     }
 
     public int[] slide_images = {
-            R.drawable.preguntas,
-            R.drawable.libros
+            R.drawable.h_bg,
+            R.drawable.captura
     };
 
     public String[] slide_heading = {
-        "Dudas",
+        "SECURE TRANSPORT",
         "LOGIN"
     };
 
     public String [] slide_descs = {
-            "Hola esta es la descripcion de las dudas",
-            "Inicia sesión con tu cuenta de Google para poder disfrutar de nuestros servicios"
+            "HOLA BIENVENIDO/A A SECURE TRANSPORT, ERES COMO TE MUEVES, POR ESO NOS PREOCUPAMOS " +
+                    "POR TU SEGURIDAD EN EL TRANSPORTE PUBLICO, REGISTRATE Y EMPIEZA A MOVERTE DE MANERA SEGURA!",
+            "Hola, bienvenido/a de nuevo, inicia sesión!"
 
     };
 
