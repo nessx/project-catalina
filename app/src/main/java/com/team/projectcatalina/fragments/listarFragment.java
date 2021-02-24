@@ -10,17 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.team.projectcatalina.MainActivity;
 import com.team.projectcatalina.R;
 import com.team.projectcatalina.clases.RecyclerViewAdapter;
-import com.team.projectcatalina.startmenu;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link listar#newInstance} factory method to
+ * Use the {@link listarFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class listar extends Fragment {
+public class listarFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,7 +29,7 @@ public class listar extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public listar() {
+    public listarFragment() {
         // Required empty public constructor
     }
 
@@ -44,8 +42,8 @@ public class listar extends Fragment {
      * @return A new instance of fragment listar.
      */
     // TODO: Rename and change types and number of parameters
-    public static listar newInstance(String param1, String param2) {
-        listar fragment = new listar();
+    public static listarFragment newInstance(String param1, String param2) {
+        listarFragment fragment = new listarFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

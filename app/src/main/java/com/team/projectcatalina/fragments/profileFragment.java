@@ -1,8 +1,6 @@
 package com.team.projectcatalina.fragments;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -30,7 +28,7 @@ import com.team.projectcatalina.R;
 import com.team.projectcatalina.sp.sp_manager;
 import com.team.projectcatalina.startmenu;
 
-public class profile extends Fragment {
+public class profileFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -54,7 +52,7 @@ public class profile extends Fragment {
     public static String personId;
     public static Uri personPhoto;
 
-    public profile() {
+    public profileFragment() {
         // Required empty public constructor
     }
 
@@ -67,8 +65,8 @@ public class profile extends Fragment {
      * @return A new instance of fragment profile.
      */
     // TODO: Rename and change types and number of parameters
-    public static profile newInstance(String param1, String param2) {
-        profile fragment = new profile();
+    public static profileFragment newInstance(String param1, String param2) {
+        profileFragment fragment = new profileFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

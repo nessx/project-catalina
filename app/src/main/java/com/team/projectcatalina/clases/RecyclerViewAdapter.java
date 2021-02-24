@@ -9,15 +9,15 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.team.projectcatalina.R;
-import com.team.projectcatalina.fragments.listar;
+import com.team.projectcatalina.fragments.listarFragment;
 
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
     private ArrayList<Vert> array_incidencies;
-    private listar context;
+    private listarFragment context;
 
-    public RecyclerViewAdapter(listar con, ArrayList<Vert> arrI){
+    public RecyclerViewAdapter(listarFragment con, ArrayList<Vert> arrI){
         array_incidencies = arrI;
         context = con;
     }
@@ -42,7 +42,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView etiquetaNom, etiquetaPrioritat, etiquetaDescripcio, etiquetaData;
+        TextView etiquetaNom;
         CardView layout;
 
         public ViewHolder(@NonNull View itemView) {
