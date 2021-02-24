@@ -44,7 +44,7 @@ public class startmenu extends AppCompatActivity {
                             openFragment(SmsFragment.newInstance("", ""));
                             return true;
                         case R.id.navigation_notifications:
-                            openFragment(NotificationFragment.newInstance("", ""));
+                            openFragment(premium.newInstance("", ""));
                             return true;
                         case R.id.navigation_paradas:
                             openFragment(listarFragment.newInstance("", ""));
