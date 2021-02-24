@@ -113,14 +113,14 @@ public class HomeFragment extends Fragment {
 
         //codigo del botton
         btn.setOnClickListener(v -> {
-            Log.i("logTest","loged bottom "+ listado.get(item));
-            Log.i("logTest","loged bottom pos "+ item);
             Dijkstra.ShortestP(listado.get(item));
             Toast.makeText(getContext(),"TEXTO SELECCIONADO "+listado.get(item).toString(), Toast.LENGTH_SHORT).show();
 
             for(int i=1;i<listado.size();i++){
                 Log.i("logTest","paradas minimas "+ Dijkstra.getShortestP(listado.get(i)));
             }
+            Log.i("logTest","loged bottom "+ listado.get(item));
+            Log.i("logTest","loged bottom pos "+ item);
 
         });
 
