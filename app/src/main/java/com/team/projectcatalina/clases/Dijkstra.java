@@ -51,7 +51,6 @@ public class Dijkstra {
         for(Vert vertex = end; vertex!=null; vertex=vertex.getPr()){
             path.add(vertex);
         }
-
         Collections.reverse(path);
         return path;
     }

@@ -1,5 +1,6 @@
 package com.team.projectcatalina.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -73,6 +74,9 @@ public class HomeFragment extends Fragment {
         Button btn = HomeFragment.findViewById(R.id.button);
         spinnerArray = new ArrayList<>();
 
+        //test
+        TextView txt = HomeFragment.findViewById(R.id.textView);
+
         ArrayList<Vert> listado = inicializarvert();
         Vert.showverts(listado);
         for(int i=1;i<listado.size();i++){
@@ -92,6 +96,7 @@ public class HomeFragment extends Fragment {
         station_dest.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
+                ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
                 Toast.makeText(getContext(),station_dest.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
                 item = station_dest.getSelectedItemPosition();
 
@@ -108,13 +113,15 @@ public class HomeFragment extends Fragment {
 
         //codigo del botton
         btn.setOnClickListener(v -> {
+            Log.i("logTest","loged bottom "+ listado.get(item));
+            Log.i("logTest","loged bottom pos "+ item);
             Dijkstra.ShortestP(listado.get(item));
             Toast.makeText(getContext(),"TEXTO SELECCIONADO "+listado.get(item).toString(), Toast.LENGTH_SHORT).show();
-            Log.i("logTest","loged bottom "+ listado.get(item));
 
             for(int i=1;i<listado.size();i++){
                 Log.i("logTest","paradas minimas "+ Dijkstra.getShortestP(listado.get(i)));
             }
+
         });
 
         return HomeFragment;
