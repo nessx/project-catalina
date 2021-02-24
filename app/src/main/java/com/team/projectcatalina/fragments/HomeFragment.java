@@ -74,8 +74,6 @@ public class HomeFragment extends Fragment {
         Button btn = HomeFragment.findViewById(R.id.button);
         spinnerArray = new ArrayList<>();
 
-        //test
-        TextView txt = HomeFragment.findViewById(R.id.textView);
 
         ArrayList<Vert> listado = inicializarvert();
         Vert.showverts(listado);

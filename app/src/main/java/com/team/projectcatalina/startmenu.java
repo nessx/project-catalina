@@ -37,17 +37,17 @@ public class startmenu extends AppCompatActivity {
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
-                        case R.id.navigation_home:
-                            openFragment(HomeFragment.newInstance("", ""));
+                        case R.id.navigation_notifications:
+                            openFragment(ParadasFragment.newInstance("", ""));
                             return true;
                         case R.id.navigation_sms:
                             openFragment(SmsFragment.newInstance("", ""));
                             return true;
-                        case R.id.navigation_notifications:
+                        case R.id.navigation_premium:
                             openFragment(premium.newInstance("", ""));
                             return true;
-                        case R.id.navigation_paradas:
-                            openFragment(listarFragment.newInstance("", ""));
+                        case R.id.navigation_home:
+                            openFragment(HomeFragment.newInstance("", ""));
                             return true;
                         case R.id.navigation_perfil:
                             openFragment(profileFragment.newInstance("", ""));

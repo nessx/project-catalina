@@ -2,22 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home"
-        android:title="Home" />
+        android:icon="@drawable/buttonstart"
+        android:title="Start" />
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/ic_stops"
+        android:title="Paradas" />
+    <item
+        android:id="@+id/navigation_premium"
+        android:icon="@drawable/buttonpremium"
+        android:title="Premium" />
     <item
         android:id="@+id/navigation_sms"
         android:icon="@drawable/buttonsup"
         android:title="Soporte" />
     <item
-        android:id="@+id/navigation_paradas"
-        android:icon="@drawable/buttonstart"
-        android:title="Start" />
-    <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/buttonpremium"
-        android:title="Premium" />
-    <item
         android:id="@+id/navigation_perfil"
-        android:icon="@drawable/buttonsorteosycuenta"
-        android:title="Sorteos" />
+        android:icon="@drawable/ic_profile"
+        android:title="Mi cuenta" />
 </menu>

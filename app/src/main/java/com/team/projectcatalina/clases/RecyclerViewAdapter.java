@@ -9,15 +9,15 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.team.projectcatalina.R;
-import com.team.projectcatalina.fragments.listarFragment;
+import com.team.projectcatalina.fragments.ParadasFragment;
 
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
     private ArrayList<Vert> array_incidencies;
-    private listarFragment context;
+    private ParadasFragment context;
 
-    public RecyclerViewAdapter(listarFragment con, ArrayList<Vert> arrI){
+    public RecyclerViewAdapter(ParadasFragment con, ArrayList<Vert> arrI){
         array_incidencies = arrI;
         context = con;
     }

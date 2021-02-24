@@ -9,44 +9,102 @@
     tools:context=".fragments.SmsFragment">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/TextTituloPremium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:textColor="@color/black"
+        android:text="HOME"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.098"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.098" />
+        app:layout_constraintVertical_bias="0.052" />
+
+    <Spinner
+        android:id="@+id/start"
+        android:layout_width="144dp"
+        android:layout_height="40dp"
+        android:background="@drawable/spinner_border"
+        android:outlineAmbientShadowColor="#000000"
+        android:outlineSpotShadowColor="#000000"
+        android:paddingBottom="13dp"
+        android:spinnerMode="dialog"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.119"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.652" />
 
     <Spinner
         android:id="@+id/destination"
         android:layout_width="144dp"
         android:layout_height="40dp"
+        android:background="@drawable/spinner_border"
         android:outlineAmbientShadowColor="#000000"
         android:outlineSpotShadowColor="#000000"
+        android:paddingBottom="13dp"
         android:spinnerMode="dialog"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.176"
+        app:layout_constraintHorizontal_bias="0.119"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.405"
-        android:paddingBottom="13dp"
-        android:background="@drawable/spinner_border"/>
+        app:layout_constraintVertical_bias="0.835" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SEND"
+        android:backgroundTint="@color/black"
+        android:text="BUSCAR"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.471"
+        app:layout_constraintHorizontal_bias="0.904"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.737" />
+        app:layout_constraintVertical_bias="0.739" />
+
+    <TextView
+        android:id="@+id/txt1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Parada de inicio"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.102"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.577" />
+
+    <TextView
+        android:id="@+id/txt2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Destino"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.088"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.765" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="257dp"
+        android:layout_height="263dp"
+        android:src="@drawable/h_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.435"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.245" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

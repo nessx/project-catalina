@@ -96,10 +96,12 @@
 
                     <Button
                         android:id="@+id/sign_out"
-                        android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:text="DESCONECTAR" />
+                        android:backgroundTint="#000000"
+                        android:text="DESCONECTAR"
+                        android:textColor="#FFFFFF" />
 
                 </LinearLayout>
 
