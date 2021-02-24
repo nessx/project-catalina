@@ -14,11 +14,43 @@
       },
       "oauth_client": [
         {
+          "client_id": "563140285667-2betkt8rm1gdg1v8su52itlp8hnf5vn0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.team.projectcatalina",
+            "certificate_hash": "83085f2e40f476d2190ead174abf7a61d1aeb49a"
+          }
+        },
+        {
+          "client_id": "563140285667-89kb8o5ckmqemc8reijk5h5h8376jjb6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.team.projectcatalina",
+            "certificate_hash": "1b5f0331d30123ae755e5577a6ae7aceaf3830fa"
+          }
+        },
+        {
           "client_id": "563140285667-a5k7gvgtcaabt8pkoqjugmvcttlraokp.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.team.projectcatalina",
             "certificate_hash": "ad7fdf24386f8687bf5805788ffb175de6fb05a9"
+          }
+        },
+        {
+          "client_id": "563140285667-al6r7ljm3d941dcbiblcov9f3kp16h94.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.team.projectcatalina",
+            "certificate_hash": "b1e2fb00c678a196b41acc8626a449c7bb97ad58"
+          }
+        },
+        {
+          "client_id": "563140285667-mavsvmhbmke412kvgoqnait6999m11mc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.team.projectcatalina",
+            "certificate_hash": "63a18f02eeee03fe0bcbea48fd332038042d1778"
           }
         },
         {

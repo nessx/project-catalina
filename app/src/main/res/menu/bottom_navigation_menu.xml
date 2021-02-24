@@ -9,6 +9,10 @@
         android:icon="@drawable/ic_sms"
         android:title="SMS" />
     <item
+        android:id="@+id/navigation_paradas"
+        android:icon="@drawable/ic_stops"
+        android:title="Paradas" />
+    <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/ic_notifications"
         android:title="Notification" />

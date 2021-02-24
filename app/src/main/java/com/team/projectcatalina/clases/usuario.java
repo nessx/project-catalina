@@ -1,24 +1,14 @@
 package com.team.projectcatalina.clases;
 
 public class usuario {
-    private String user = "admin";
-    private String passwd = "admin";
+    private String user;
 
-    public void setuser(String titulo) {
+    public void setuser(String user) {
         this.user = user;
     }
 
-    public String getuser() {
+    public String GetCurrentUser() {
         return user;
     }
-
-    public void setpasswd(String passwd) {
-        this.passwd = passwd;
-    }
-
-    public String getpasswd() {
-        return passwd;
-    }
-
 }
 
