@@ -1,4 +1,5 @@
-# Secure Transport dev
+# Secure Transport DEV
+#APP EN DESARROLLO :(
 
 ### Descarga e instalación
 ```
