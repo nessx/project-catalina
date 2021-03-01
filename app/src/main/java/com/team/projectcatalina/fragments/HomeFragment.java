@@ -19,6 +19,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.team.projectcatalina.R;
 import com.team.projectcatalina.clases.Dijkstra;
 import com.team.projectcatalina.clases.Edge;
@@ -31,6 +37,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -74,12 +81,29 @@ public class HomeFragment extends Fragment {
         Button btn = HomeFragment.findViewById(R.id.button);
         spinnerArray = new ArrayList<>();
 
+        // Write a message to the database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("SECURE_TRANSPORT/Estaciones");
+
+
+        //Writing Hashmap
+        Map<String, Object> mHashmap = new HashMap<>();
+
+        //mHashmap.put("ESPANYA/Estado", "DISPONIBLE");
+        //mHashmap.put("VERDAGER/Estado", "DISPONIBLE");
+        //mHashmap.put("DIAGONAL/Estado", "BLOQUEADA");
+
 
         ArrayList<Vert> listado = inicializarvert();
         Vert.showverts(listado);
         for(int i=1;i<listado.size();i++){
             listado.get(i).showwdges();
+
+            //importing stations for firebase
+            Log.i("logTes","chivato "+ listado.get(i));
+            mHashmap.put(listado.get(i)+"/Estado", "DISPONIBLE");
         }
+        myRef.updateChildren(mHashmap);
 
         //SPINNET CONFIG
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
@@ -122,6 +146,28 @@ public class HomeFragment extends Fragment {
 
         });
 
+        // Read from the database
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                //String value = dataSnapshot.getValue(String.class);
+                Map<String, Object> value = (Map<String, Object>) dataSnapshot.getValue();
+                Log.d("FIREBASEDB", "Value is: " + value);
+
+                //log estus
+                Log.d("FIREBASEDB", "Value is: " + value.get("Hospital_clinic"));
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("FIREBASEDB", "Failed to read value.", error.toException());
+            }
+        });
+
         return HomeFragment;
     }
 
@@ -154,6 +200,7 @@ public class HomeFragment extends Fragment {
 
                     //adding items for the spinner
                     spinnerArray.add(vertexId);
+                    Log.i("logTest","set data "+ vertexId);
 
                 } else {
                     //store the edges
