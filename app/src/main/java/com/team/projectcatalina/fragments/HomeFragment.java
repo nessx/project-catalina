@@ -51,6 +51,7 @@ public class HomeFragment extends Fragment {
     //dikstra algorithm
     private static Spinner station_dest;
     protected ArrayList<Vert> parada;
+    protected ArrayList<Vert> spinnerarray;
     private int item;
     //end
 
@@ -96,7 +97,6 @@ public class HomeFragment extends Fragment {
             user_name.setText("Hola!, "+acct.getGivenName());
         }
 
-
         if(getArguments()!=null){
             parada = (ArrayList<Vert>) getArguments().getSerializable("arrayParadas");
         }
@@ -128,6 +128,8 @@ public class HomeFragment extends Fragment {
                 getContext(),
                 android.R.layout.simple_spinner_item,
                 spinnerArray
+
+                //spinner array es la arraylist de la que se alimenta el spinner
         );
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
