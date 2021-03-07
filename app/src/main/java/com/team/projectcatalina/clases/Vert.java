@@ -2,10 +2,11 @@ package com.team.projectcatalina.clases;
 
 import android.util.Log;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Vert implements Comparable<Vert>{
+public class Vert implements Comparable<Vert>, Serializable {
 
     private boolean visited;
     private String name;

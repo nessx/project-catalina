@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment {
 
     //dikstra algorithm
     private static Spinner station_dest;
-    private static List<String> spinnerArray;
+    protected ArrayList<Vert> paradas;
     private int item;
     //end
 
@@ -73,37 +73,47 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View HomeFragment = inflater.inflate(R.layout.fragment_home, container, false);
 
         station_dest = HomeFragment.findViewById(R.id.destination);
         Button btn = HomeFragment.findViewById(R.id.button);
-        spinnerArray = new ArrayList<>();
 
-        // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("SECURE_TRANSPORT/Estaciones");
+        if(getArguments()!=null){
+            paradas = (ArrayList<Vert>) getArguments().getSerializable("arrayParadas");
+        }
 
-
-        //Writing Hashmap
-        Map<String, Object> mHashmap = new HashMap<>();
+        Log.i("FIREBASED", "ff " + paradas.get(0).getName());
 
         //mHashmap.put("ESPANYA/Estado", "DISPONIBLE");
         //mHashmap.put("VERDAGER/Estado", "DISPONIBLE");
         //mHashmap.put("DIAGONAL/Estado", "BLOQUEADA");
 
+        /* ArrayList<Vert> listado = inicializarvert();
+        Vert.showverts(paradas);
 
-        ArrayList<Vert> listado = inicializarvert();
-        Vert.showverts(listado);
         for(int i=1;i<listado.size();i++){
             listado.get(i).showwdges();
 
             //importing stations for firebase
-            Log.i("logTes","chivato "+ listado.get(i));
-            mHashmap.put(listado.get(i)+"/Estado", "DISPONIBLE");
+            //Log.i("logTes","chivato "+ listado.get(i));
+            //mHashmap.put(listado.get(i)+"/Estado", "DISPONIBLE");
         }
-        myRef.updateChildren(mHashmap);
+        //myRef.updateChildren(mHashmap);
+
+        for(int i=0;i<spinnerArray.size();i++){
+            Log.d("FIREBASED", "Paradas " + spinnerArray.get(i));
+        }
 
         //SPINNET CONFIG
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
@@ -111,6 +121,7 @@ public class HomeFragment extends Fragment {
                 android.R.layout.simple_spinner_item,
                 spinnerArray
         );
+
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         station_dest.setPrompt("Selecciona lugar de destino");
         station_dest.setAdapter(adapter);
@@ -138,93 +149,16 @@ public class HomeFragment extends Fragment {
             Dijkstra.ShortestP(listado.get(item));
             Toast.makeText(getContext(),"TEXTO SELECCIONADO "+listado.get(item).toString(), Toast.LENGTH_SHORT).show();
 
-            for(int i=1;i<listado.size();i++){
+            for(int i=0;i<listado.size();i++){
                 Log.i("logTest","paradas minimas "+ Dijkstra.getShortestP(listado.get(i)));
             }
             Log.i("logTest","loged bottom "+ listado.get(item));
             Log.i("logTest","loged bottom pos "+ item);
 
+
         });
-
-        // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                //String value = dataSnapshot.getValue(String.class);
-                Map<String, Object> value = (Map<String, Object>) dataSnapshot.getValue();
-                Log.d("FIREBASEDB", "Value is: " + value);
-
-                //log estus
-                Log.d("FIREBASEDB", "Value is: " + value.get("Hospital_clinic"));
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("FIREBASEDB", "Failed to read value.", error.toException());
-            }
-        });
-
+        */
         return HomeFragment;
-    }
 
-    //DIKSTRA ALGORITHM
-    public ArrayList<Vert> inicializarvert(){
-        ArrayList<Vert> lista = new ArrayList<>();
-
-        Map<String, Vert> vertexMap = new HashMap<String, Vert>();
-        BufferedReader in = null;
-
-        try {
-            URL url = new URL("http://indomablesrp.online/file.txt");
-            in = new BufferedReader(new InputStreamReader(url.openStream()));
-            String line;
-            boolean inVertex = true;
-
-            while ((line = in.readLine()) != null) {
-                if (line.charAt(0) == '#') {
-                    inVertex = false;
-                    continue;
-                }
-                if (inVertex) {
-                    //store the vertices
-                    int indexOfSpace = line.indexOf(' ');
-                    String vertexId = line.substring(0, indexOfSpace);
-                    String vertexName = line.substring(indexOfSpace + 1);
-                    Vert v = new Vert(vertexName);
-                    lista.add(v);
-                    vertexMap.put(vertexId, v);
-
-                    //adding items for the spinner
-                    spinnerArray.add(vertexId);
-                    Log.i("logTest","set data "+ vertexId);
-
-                } else {
-                    //store the edges
-                    String[] parts = line.split(" ");
-                    String vFrom = parts[0];
-                    String vTo = parts[1];
-                    double weight = Double.parseDouble(parts[2]);
-                    Vert v = vertexMap.get(vFrom);
-                    if (v != null) {
-                        v.addNeighbour(new Edge(weight, vertexMap.get(vFrom), vertexMap.get(vTo)));
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        finally{
-            if(in!= null)
-                try {
-                    in.close();
-                } catch (IOException ignore) {
-                    ignore.printStackTrace();
-                }
-        }
-        return lista;
     }
 }

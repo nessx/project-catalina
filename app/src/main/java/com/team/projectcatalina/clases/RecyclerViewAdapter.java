@@ -14,11 +14,11 @@ import com.team.projectcatalina.fragments.ParadasFragment;
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
-    private ArrayList<Vert> array_incidencies;
+    private ArrayList<Vert> array_paradas;
     private ParadasFragment context;
 
     public RecyclerViewAdapter(ParadasFragment con, ArrayList<Vert> arrI){
-        array_incidencies = arrI;
+        array_paradas = arrI;
         context = con;
     }
 
@@ -33,12 +33,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.etiquetaNom.setText(array_incidencies.get(position).getName());
+        holder.etiquetaNom.setText(array_paradas.get(position).getName());
     }
 
     @Override
     public int getItemCount() {
-        return array_incidencies.size();
+        return array_paradas.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
