@@ -30,8 +30,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.team.projectcatalina.clases.SlideAdapter;
+import com.team.projectcatalina.fragments.HomeFragment;
 import com.team.projectcatalina.sp.sp_manager;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -50,13 +59,16 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout mDoLayout;
     private SlideAdapter sliderAdapter;
     private TextView[] mDots;
-
+    private DatabaseReference myRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
         s_preferences = new sp_manager(getApplicationContext());
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("SECURE_TRANSPORT/USERS");
 
         //PERMISION POLICY
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -79,11 +91,6 @@ public class MainActivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         //END
 
-        /*
-        //test language preferences
-        if(!new sp_manager(this).noLang()){
-            setAppLocale(s_preferences.getLang());
-        }*/
 
         //GOOGLE SING
         //Initializing Views
@@ -105,29 +112,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //END
-
-
-
-
     }
 
     public void gotomenu(){
         Intent intent = new Intent (MainActivity.this, startmenu.class);
         startActivity(intent);
     }
-
-    //LANG OPTIONS
-    /*
-    private void setAppLocale(String localeCode){
-        Resources resources = getResources();
-        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
-        Configuration configuration = resources.getConfiguration();
-        configuration.setLocale(new Locale(localeCode.toLowerCase()));
-        resources.updateConfiguration(configuration, displayMetrics);
-        configuration.locale = new Locale(localeCode.toLowerCase());
-        resources.updateConfiguration(configuration, displayMetrics);
-    }
-     */
 
     //FIREBASE LOGIN GOOGLE ACCOUNT
     private void signIn() {
@@ -145,11 +135,44 @@ public class MainActivity extends AppCompatActivity {
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                Toast.makeText(this,"Loggeado correctamente " + account.getDisplayName(), Toast.LENGTH_SHORT).show();
                 Log.i(TAG, "firebaseAuthWithGoogle:" + account.getId());
                 SharedPreferences sp = getSharedPreferences("GoogleLoginDetails" ,Context.MODE_PRIVATE);
                 s_preferences.SaveGoogleLoginDetails(account.getId());
                 firebaseAuthWithGoogle(account.getIdToken());
+
+                //Writing Hashmap
+                Map<String, Object> mHashmap = new HashMap<>();
+
+                //Log.i("logTes","chivato "+ listado.get(i));
+
+                // Read from the database
+                myRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Map<String, Object> value = (Map<String, Object>) dataSnapshot.getValue();
+
+                        for (Map.Entry entry : value.entrySet()) {
+                            //Log.d("FIREBASEUSER", "key: " + entry.getKey() + "; value: " + entry.getValue());
+                        }
+
+                        if (value.get(account.getId()) != null){
+                            Log.d("FIREBASEUSER", "EXISTE");
+                        }else{
+                            Log.d("FIREBASEUSER", "NO EXISTE");
+                            mHashmap.put(account.getId()+"/PREMIUM", 0);
+                            mHashmap.put(account.getId()+"/MAIL", account.getEmail());
+                            mHashmap.put(account.getId()+"/FULLNAME", account.getDisplayName());
+                            myRef.updateChildren(mHashmap);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w("FIREBASEDB", "Failed to read value.", error.toException());
+                    }
+                });
+
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Toast.makeText(this,"Google sign in failed "+e.toString(), Toast.LENGTH_SHORT).show();

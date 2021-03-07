@@ -1,14 +1,27 @@
 package com.team.projectcatalina.fragments;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.team.projectcatalina.R;
+import com.team.projectcatalina.clases.user;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +38,8 @@ public class premium extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    Button btn_premium;
+    private DatabaseReference myRef;
 
     public premium() {
         // Required empty public constructor
@@ -61,6 +76,40 @@ public class premium extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_premium, container, false);
+        View premium = inflater.inflate(R.layout.fragment_premium, container, false);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("SECURE_TRANSPORT/USERS");
+        btn_premium = premium.findViewById(R.id.BtnPremium);
+        Map<String, Object> mHashmap = new HashMap<>();
+
+        btn_premium.setOnClickListener(v -> {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+            dialog.setTitle( "Seguro/a?" )
+                    .setMessage("Estas apunto de comprar el paquete premium de SECURE TRASPORT")
+                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                  public void onClick(DialogInterface dialoginterface, int i) {
+                      dialoginterface.cancel();
+                      }})
+                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialoginterface, int i) {
+                            // Read from the database
+                            myRef.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    Map<String, Object> value = (Map<String, Object>) dataSnapshot.getValue();
+                                    myRef.updateChildren(mHashmap);
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError error) {
+                                    // Failed to read value
+                                    Log.w("FIREBASEDB", "Failed to read value.", error.toException());
+                                }
+                            });
+                        }
+                    }).show();
+        });
+
+        return premium;
     }
 }

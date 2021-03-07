@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.team.projectcatalina.clases.Vert;
+import com.team.projectcatalina.clases.user;
 import com.team.projectcatalina.fragments.*;
 
 import java.util.ArrayList;
@@ -39,38 +40,39 @@ public class startmenu extends AppCompatActivity {
         openFragment(HomeFragment.newInstance("", ""));
         //end
 
-        paradas= inicializarvert();
+        paradas = inicializarvert();
     }
 
 
     //bottom menu
     public void openFragment(Fragment fragment) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getSupportFragmentManager()
+                .beginTransaction();
 
         Bundle bundle = new Bundle();
         bundle.putSerializable("arrayParadas", paradas);
         fragment.setArguments(bundle);
 
         transaction.replace(R.id.container, fragment);
-
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
     BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
-                        case R.id.navigation_notifications:
-                            openFragment(ParadasFragment.newInstance("", ""));
+                        case R.id.navigation_home:
+                            openFragment(HomeFragment.newInstance("", ""));
                             return true;
-                        case R.id.navigation_sms:
-                            openFragment(SmsFragment.newInstance("", ""));
+                        case R.id.navigation_paradas:
+                            openFragment(ParadasFragment.newInstance("", ""));
                             return true;
                         case R.id.navigation_premium:
                             openFragment(premium.newInstance("", ""));
                             return true;
-                        case R.id.navigation_home:
-                            openFragment(HomeFragment.newInstance("", ""));
+                        case R.id.navigation_soporte_fragment_v2:
+                            openFragment(SoporteFragmentV2.newInstance("", ""));
                             return true;
                         case R.id.navigation_perfil:
                             openFragment(profileFragment.newInstance("", ""));
@@ -110,13 +112,10 @@ public class startmenu extends AppCompatActivity {
 
                     Vert v = new Vert(entry.getKey().toString());
                     //spinnerArray.add(entry.getKey().toString());
-
                     lista.add(v);
-
                     for(int i=0;i<lista.size();i++){
                         Log.d("FIREBASED", "Lista " + lista.get(i));
                     }
-
                     Log.d("FIREBASEDB", "Paradas " + entry.getKey().toString());
 
                     //v.addNeighbour(new Edge(weight, vertexMap.get(vFrom), vertexMap.get(vTo)));

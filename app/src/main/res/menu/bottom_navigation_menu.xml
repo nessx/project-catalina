@@ -5,7 +5,7 @@
         android:icon="@drawable/buttonstart"
         android:title="Start" />
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_paradas"
         android:icon="@drawable/ic_stops"
         android:title="Paradas" />
     <item
@@ -13,7 +13,7 @@
         android:icon="@drawable/buttonpremium"
         android:title="Premium" />
     <item
-        android:id="@+id/navigation_sms"
+        android:id="@+id/navigation_soporte_fragment_v2"
         android:icon="@drawable/buttonsup"
         android:title="Soporte" />
     <item

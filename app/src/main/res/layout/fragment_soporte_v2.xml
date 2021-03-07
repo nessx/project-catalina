@@ -5,6 +5,7 @@
     android:id="@+id/frameLayout5"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".fragments.SoporteFragmentV2">
 
     <TextView
@@ -46,7 +47,8 @@
         app:layout_constraintHorizontal_bias="0.273"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.227" />
+        app:layout_constraintVertical_bias="0.227"
+        app:iconTint="#000000"/>
 
     <EditText
         android:id="@+id/EditTextReasonReport"
@@ -59,7 +61,8 @@
         app:layout_constraintHorizontal_bias="0.474"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.553" />
+        app:layout_constraintVertical_bias="0.553"
+        app:iconTint="#000000"/>
 
     <Button
         android:id="@+id/button2"
@@ -67,12 +70,15 @@
         android:layout_height="52dp"
         android:backgroundTint="#5E5E5E"
         android:textAllCaps="false"
+        android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:iconTint="#FFFFFF"
+        android:text="Send the report"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.756"
-        tools:text="Send the report" />
+        app:layout_constraintVertical_bias="0.756" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

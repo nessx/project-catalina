@@ -1,46 +1,38 @@
 package com.team.projectcatalina.fragments;
 
-import android.graphics.Color;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.team.projectcatalina.MainActivity;
 import com.team.projectcatalina.R;
-import com.team.projectcatalina.clases.Dijkstra;
-import com.team.projectcatalina.clases.Edge;
 import com.team.projectcatalina.clases.Vert;
-import com.team.projectcatalina.startmenu;
+import com.team.projectcatalina.clases.user;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link HomeFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
 public class HomeFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -52,9 +44,13 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+
+    TextView name;
+    GoogleSignInClient mGoogleSignInClient;
+
     //dikstra algorithm
     private static Spinner station_dest;
-    protected ArrayList<Vert> paradas;
+    protected ArrayList<Vert> parada;
     private int item;
     //end
 
@@ -84,16 +80,28 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View HomeFragment = inflater.inflate(R.layout.fragment_home, container, false);
+        View HomeFragment = inflater.inflate(R.layout.fragment_home, container, false);
 
         station_dest = HomeFragment.findViewById(R.id.destination);
         Button btn = HomeFragment.findViewById(R.id.button);
-
-        if(getArguments()!=null){
-            paradas = (ArrayList<Vert>) getArguments().getSerializable("arrayParadas");
+        TextView user_name = HomeFragment.findViewById(R.id.name);
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(getContext(), gso);
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getContext());
+        user usr = new user();
+        if (acct != null) {
+            usr.setid(acct.getId());
+            user_name.setText("Hola!, "+acct.getGivenName());
         }
 
-        Log.i("FIREBASED", "ff " + paradas.get(0).getName());
+
+        if(getArguments()!=null){
+            parada = (ArrayList<Vert>) getArguments().getSerializable("arrayParadas");
+        }
+
+        //Log.i("FIREBASED", "ff " + parada.get(0).getName());
 
         //mHashmap.put("ESPANYA/Estado", "DISPONIBLE");
         //mHashmap.put("VERDAGER/Estado", "DISPONIBLE");
@@ -159,6 +167,5 @@ public class HomeFragment extends Fragment {
         });
         */
         return HomeFragment;
-
     }
 }
