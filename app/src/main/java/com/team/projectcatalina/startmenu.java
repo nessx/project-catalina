@@ -15,7 +15,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.team.projectcatalina.clases.Dijkstra;
 import com.team.projectcatalina.clases.Edge;
 import com.team.projectcatalina.clases.Vert;
 import com.team.projectcatalina.clases.user;
@@ -122,15 +121,16 @@ public class startmenu extends AppCompatActivity {
 
 
                 for (Map.Entry entry : value.entrySet()) {
-                    //Log.d("FIREBASEDB", "key: " + entry.getKey() + "; value: " + entry.getValue());
+                    Log.d("KEY", "key: " + entry.getKey() + "; value: " + entry.getValue());
 
                     Vert v = new Vert(entry.getKey().toString());
                     //spinnerArray.add(entry.getKey().toString());
                     lista.add(v);
-                    Log.d("FIREBASEDB", "Lista " + lista.get(i));
+                    Log.d("Lista", "Lista " + lista.get(i));
                     i++;
                 }
                 //Log.d("FIREBASEDB", "Value is: " + value.get("Hospital_clinic"));
+
             }
 
             @Override
@@ -146,18 +146,11 @@ public class startmenu extends AppCompatActivity {
                 for(DataSnapshot data : dataSnapshot.getChildren()) {
                     String vFrom = data.child("FROM").getValue(String.class);
                     String vTo = data.child("TO").getValue(String.class);
-                    int weight = data.child("WEIGHT").getValue(int.class);
-
-                    //v.addNeighbour(new Edge(weight, vertexMap.get(vFrom), vertexMap.get(vTo)));
+                    float weight = data.child("WEIGHT").getValue(float.class);
+                    for (int i=0;i<lista.size();i++){
+                        lista.get(i).addNeighbour(new Edge(weight, vertexMap.get(vFrom), vertexMap.get(vTo)));
+                    }
                     Log.d("FIREBASEDB", "FROM:" + vFrom + "; TO:" + vTo + "; WEIGHT;"+ weight);
-
-                    //TEST
-                    /*
-                    Dijkstra.getShortestP(lista.get(0));
-                    for(int x=0;x<lista.size();x++){
-                        Log.i("FIREBASEDB","paradas minimas "+ Dijkstra.getShortestP(lista.get(x)));
-                    } */
-
                 }
 
             }
@@ -168,9 +161,6 @@ public class startmenu extends AppCompatActivity {
                 Log.w("FIREBASEDB", "Failed to read value.", error.toException());
             }
         });
-
-        //Dijkstra.ShortestP(lista.get(0));
-        //Toast.makeText(getApplicationContext(),"TEXTO SELECCIONADO "+lista.get(0).toString(), Toast.LENGTH_SHORT).show();
 
 
         return lista;
