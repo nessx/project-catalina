@@ -60,21 +60,8 @@ public class ParadasFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.d("aa","ENTRO AL oncreate de paradas");
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.d("aa","ENTRO AL ONRESUME del paradas");
-
-        if (getArguments() != null) {
-            Log.d("aa","ENTRO AL bundle");
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }

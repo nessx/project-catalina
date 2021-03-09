@@ -84,12 +84,6 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        Log.d("aa","ENTRO AL onresume de home");
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View HomeFragment = inflater.inflate(R.layout.fragment_home, container, false);
