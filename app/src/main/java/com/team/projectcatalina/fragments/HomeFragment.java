@@ -73,9 +73,20 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            Log.d("aa","ENTRO AL oncreate de home");
+
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
+            parada = (ArrayList<Vert>) getArguments().getSerializable("arrayParadas");
+            //Log.d("aa","ENTRO AL oncreate de home: " + mParam1 + "tam" + getArguments().size() + "aa" + parada.get(0).getName());
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("aa","ENTRO AL onresume de home");
     }
 
     @Override

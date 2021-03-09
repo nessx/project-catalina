@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.team.projectcatalina.clases.Dijkstra;
 import com.team.projectcatalina.clases.Edge;
 import com.team.projectcatalina.clases.Vert;
 import com.team.projectcatalina.clases.user;
@@ -47,8 +48,16 @@ public class startmenu extends AppCompatActivity {
         //end
 
         paradas = inicializarvert();
+
+        Log.d("aa","ENTRO EN EL ONCREATE");
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("aa","ENTRO AL ONRESUME");
+    }
 
     //bottom menu
     public void openFragment(Fragment fragment) {
@@ -66,10 +75,11 @@ public class startmenu extends AppCompatActivity {
 
     BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.navigation_home:
-                            openFragment(HomeFragment.newInstance("", ""));
+                            openFragment(HomeFragment.newInstance("",""));
                             return true;
                         case R.id.navigation_paradas:
                             openFragment(ParadasFragment.newInstance("", ""));
@@ -118,8 +128,6 @@ public class startmenu extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Map<String, Object> value = (Map<String, Object>) dataSnapshot.getValue();
                 int i = 0;
-
-
                 for (Map.Entry entry : value.entrySet()) {
                     Log.d("KEY", "key: " + entry.getKey() + "; value: " + entry.getValue());
 
@@ -147,6 +155,7 @@ public class startmenu extends AppCompatActivity {
                     String vFrom = data.child("FROM").getValue(String.class);
                     String vTo = data.child("TO").getValue(String.class);
                     float weight = data.child("WEIGHT").getValue(float.class);
+                    Log.d("aa", "+" + lista.size());
                     for (int i=0;i<lista.size();i++){
                         lista.get(i).addNeighbour(new Edge(weight, vertexMap.get(vFrom), vertexMap.get(vTo)));
                     }

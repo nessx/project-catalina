@@ -36,6 +36,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.team.projectcatalina.clases.SlideAdapter;
+import com.team.projectcatalina.clases.user;
 import com.team.projectcatalina.fragments.HomeFragment;
 import com.team.projectcatalina.sp.sp_manager;
 
@@ -135,8 +136,6 @@ public class MainActivity extends AppCompatActivity {
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                Log.i(TAG, "firebaseAuthWithGoogle:" + account.getId());
-                SharedPreferences sp = getSharedPreferences("GoogleLoginDetails" ,Context.MODE_PRIVATE);
                 s_preferences.SaveGoogleLoginDetails(account.getId());
                 firebaseAuthWithGoogle(account.getIdToken());
 
@@ -152,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
                         Map<String, Object> value = (Map<String, Object>) dataSnapshot.getValue();
 
                         for (Map.Entry entry : value.entrySet()) {
-                            //Log.d("FIREBASEUSER", "key: " + entry.getKey() + "; value: " + entry.getValue());
+                            Log.d("FIREBASEUSER", "key: " + entry.getKey() + "; value: " + entry.getValue());
                         }
 
                         if (value.get(account.getId()) != null){

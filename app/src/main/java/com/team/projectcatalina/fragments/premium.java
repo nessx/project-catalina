@@ -97,6 +97,12 @@ public class premium extends Fragment {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     Map<String, Object> value = (Map<String, Object>) dataSnapshot.getValue();
+                                    user usr = new user();
+
+                                    for (Map.Entry entry : value.entrySet()) {
+                                        Log.d("FIREBASEUSER", "key: " + entry.getKey() + "; value: " + entry.getValue());
+                                    }
+
                                     myRef.updateChildren(mHashmap);
                                 }
 
