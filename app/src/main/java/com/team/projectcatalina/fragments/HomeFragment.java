@@ -77,8 +77,16 @@ public class HomeFragment extends Fragment {
         myFragment.setArguments(args);
 
         return fragment;
+    }
+    public static HomeFragment newInstance() {
+        Bundle args = new Bundle();
+        args.putSerializable("arrayParadas", paradas);
+        HomeFragment fragment = new HomeFragment();
+        fragment.setArguments(args);
+        return fragment;
     }*/
 
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
