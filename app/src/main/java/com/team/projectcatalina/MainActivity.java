@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                         Map<String, Object> value = (Map<String, Object>) dataSnapshot.getValue();
 
                         for (Map.Entry entry : value.entrySet()) {
-                            //Log.d("FIREBASEUSER", "key: " + entry.getKey() + "; value: " + entry.getValue());
+                            Log.d("FIREBASEUSER", "key: " + entry.getKey() + "; value: " + entry.getValue());
                         }
 
                         if (value.get(account.getId()) != null){

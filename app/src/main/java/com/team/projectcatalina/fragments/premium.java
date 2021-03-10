@@ -12,6 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -82,6 +86,7 @@ public class premium extends Fragment {
         btn_premium = premium.findViewById(R.id.BtnPremium);
         Map<String, Object> mHashmap = new HashMap<>();
 
+
         btn_premium.setOnClickListener(v -> {
             AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
             dialog.setTitle( "Seguro/a?" )
@@ -91,12 +96,18 @@ public class premium extends Fragment {
                       dialoginterface.cancel();
                       }})
                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialoginterface, int i) {
+                        public void onClick(DialogInterface dialoginterface, int i ) {
                             // Read from the database
                             myRef.addValueEventListener(new ValueEventListener() {
                                 @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                public void onDataChange(DataSnapshot dataSnapshot ) {
                                     Map<String, Object> value = (Map<String, Object>) dataSnapshot.getValue();
+                                    for (Map.Entry entry : value.entrySet()) {
+                                        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getContext());
+                                        String personId = acct.getId();
+                                        Log.d("FIREBASEUSER", personId);
+                                        mHashmap.put(personId+"/PREMIUM", 1);
+                                    }
                                     myRef.updateChildren(mHashmap);
                                 }
 

@@ -98,6 +98,7 @@ public class startmenu extends AppCompatActivity {
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("SECURE_TRANSPORT/Estaciones");
+        Log.i("hola", String.valueOf(myRef));
 
         DatabaseReference myRef2 = database.getReference("SECURE_TRANSPORT/NODOS");
 
