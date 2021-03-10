@@ -1,4 +1,5 @@
 package com.team.projectcatalina.clases;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     .orderByValue()
                     .equalTo("DISPONIBLE");
         String estadoS = estado.toString();
+        Log.i("FIREBASED", "estado? " + estadoS);
         return estadoS;
     }
 
