@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -96,7 +98,9 @@ public class premium extends Fragment {
                             myRef.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
-                                    Map<String, Object> value = (Map<String, Object>) dataSnapshot.getValue();
+                                    GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getContext());
+                                    String personId = acct.getId();
+                                    mHashmap.put(personId+"/PREMIUM", 1);
                                     myRef.updateChildren(mHashmap);
                                 }
 
