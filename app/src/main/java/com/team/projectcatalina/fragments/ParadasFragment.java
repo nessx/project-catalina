@@ -71,8 +71,6 @@ public class ParadasFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View listar = inflater.inflate(R.layout.fragment_paradas, container, false);
-        TextView estado = listar.findViewById(R.id.estado);
-        estado.setBackgroundResource(R.drawable.circle_red);
 
         if(getArguments()!=null){
             paradas = (ArrayList<Vert>) getArguments().getSerializable("arrayParadas");

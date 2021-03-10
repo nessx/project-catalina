@@ -42,11 +42,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView etiquetaNom;
+        TextView etiquetaNom,estado;
         CardView layout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            estado = itemView.findViewById(R.id.estado);
+            estado.setBackgroundResource(R.drawable.circle_red);
             etiquetaNom = itemView.findViewById(R.id.itemListIncidencia);
             layout = itemView.findViewById(R.id.layout);
         }
