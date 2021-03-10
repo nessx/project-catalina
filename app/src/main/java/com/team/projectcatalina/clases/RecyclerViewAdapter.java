@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.team.projectcatalina.R;
 import com.team.projectcatalina.fragments.ParadasFragment;
 
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
     private ArrayList<Vert> array_paradas;
     private ParadasFragment context;
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     public RecyclerViewAdapter(ParadasFragment con, ArrayList<Vert> arrI){
         array_paradas = arrI;
@@ -41,6 +44,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return array_paradas.size();
     }
 
+    public String Query (){
+        Query estado =
+                FirebaseDatabase.getInstance().getReference()
+                    .child("Estaciones")
+                    .orderByValue()
+                    .equalTo("DISPONIBLE");
+        String estadoS = estado.toString();
+        return estadoS;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView etiquetaNom,estado;
         CardView layout;
@@ -48,7 +61,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             estado = itemView.findViewById(R.id.estado);
-            estado.setBackgroundResource(R.drawable.circle_red);
+            if (Query() == "DISPONIBLE"){
+                estado.setBackgroundResource(R.drawable.circle_green);
+            }else {
+                estado.setBackgroundResource(R.drawable.circle_red);
+            }
             etiquetaNom = itemView.findViewById(R.id.itemListIncidencia);
             layout = itemView.findViewById(R.id.layout);
         }
