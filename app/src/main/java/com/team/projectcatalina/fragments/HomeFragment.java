@@ -68,6 +68,16 @@ public class HomeFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+    
+    /*
+    public static HomeFragment newInstance(ArrayList<Vert> arraypar) {
+        HomeFragment fragment = new HomeFragment();
+        Bundle args = new Bundle();
+        args.putSerializable("ArrayParadas", arraypar);
+        myFragment.setArguments(args);
+
+        return fragment;
+    }*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
