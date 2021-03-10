@@ -3,21 +3,21 @@
     <item
         android:id="@+id/navigation_home"
         android:icon="@drawable/buttonstart"
-        android:title="Start" />
+        android:title="INICIO" />
     <item
         android:id="@+id/navigation_paradas"
         android:icon="@drawable/ic_stops"
-        android:title="Paradas" />
+        android:title="PARADAS" />
     <item
         android:id="@+id/navigation_premium"
         android:icon="@drawable/buttonpremium"
-        android:title="Premium" />
+        android:title="PREMIUM" />
     <item
         android:id="@+id/navigation_soporte_fragment_v2"
         android:icon="@drawable/buttonsup"
-        android:title="Soporte" />
+        android:title="SOPORTE" />
     <item
         android:id="@+id/navigation_perfil"
         android:icon="@drawable/ic_profile"
-        android:title="Mi cuenta" />
+        android:title="MI CUENTA" />
 </menu>
