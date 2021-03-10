@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.team.projectcatalina.R;
@@ -46,11 +47,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public String Query (){
-        Query estado =
-                FirebaseDatabase.getInstance().getReference()
-                    .child("Estaciones")
-                    .orderByValue()
-                    .equalTo("DISPONIBLE");
+        Task estado =
+                FirebaseDatabase.getInstance().getReference().child("Estaciones").orderByChild("DISPONIBLE").get();
         String estadoS = estado.toString();
         Log.i("FIREBASED", "estado? " + estadoS);
         return estadoS;
