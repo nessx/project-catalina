@@ -9,8 +9,12 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.team.projectcatalina.R;
 import com.team.projectcatalina.fragments.ParadasFragment;
 
@@ -52,8 +56,28 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     .orderByValue()
                     .equalTo("DISPONIBLE");
         String estadoS = estado.toString();
-        Log.i("FIREBASED", "estado? " + estadoS);
+        Log.i("ESTADOS", "estado? " + estadoS);
         return estadoS;
+    }
+    public void Querynessx(){
+        DatabaseReference reference = database.getReference("SECURE_TRANSPORT/Estaciones/");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int i = 0;
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    String parada = data.getKey();
+                    String status = data.child("Estado").getValue(String.class);
+                    Log.d("ESTADOS", "ESTADO:" + status + "; PARADA:" +parada+" VALOR DE I "+i);
+                    i++;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

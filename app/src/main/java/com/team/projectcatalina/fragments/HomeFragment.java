@@ -79,29 +79,18 @@ public class HomeFragment extends Fragment {
         HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
         args.putSerializable("ArrayParadas", arraypar);
-        myFragment.setArguments(args);
-
-        return fragment;
-    }
-    public static HomeFragment newInstance() {
-        Bundle args = new Bundle();
-        args.putSerializable("arrayParadas", paradas);
-        HomeFragment fragment = new HomeFragment();
         fragment.setArguments(args);
+
         return fragment;
     }*/
 
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             Log.d("aa","ENTRO AL oncreate de home");
-
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-
-            //paradas = (ArrayList<Vert>) getArguments().getSerializable("arrayParadas");
+            paradas = (ArrayList<Vert>) getArguments().getSerializable("arrayParadas");
             //Log.d("aa","ENTRO AL oncreate de home: " + mParam1 + "tam" + getArguments().size() + "aa" + parada.get(0).getName());
         }
     }
@@ -123,10 +112,6 @@ public class HomeFragment extends Fragment {
         if (acct != null) {
             usr.setid(acct.getId());
             user_name.setText("Hola!, "+acct.getGivenName());
-        }
-
-        if(getArguments()!=null){
-            paradas = (ArrayList<Vert>) getArguments().getSerializable("arrayParadas");
         }
 
         //Log.i("FIREBASED", "ff " + parada.get(0).getName());

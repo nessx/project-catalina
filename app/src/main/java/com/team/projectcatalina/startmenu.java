@@ -132,7 +132,6 @@ public class startmenu extends AppCompatActivity {
                     Log.d("KEY", "key: " + entry.getKey() + "; value: " + entry.getValue());
 
                     Vert v = new Vert(entry.getKey().toString());
-                    Log.d("vvv", "vvv " + v);
                     //spinnerArray.add(entry.getKey().toString());
                     paradas.add(v);
                     Log.d("Lista", "Lista " + paradas.get(i));
