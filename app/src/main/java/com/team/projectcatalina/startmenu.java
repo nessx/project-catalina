@@ -34,7 +34,7 @@ public class startmenu extends AppCompatActivity {
     BottomNavigationView bottomNavigation;
 
     private static List<String> spinnerArray;
-    protected ArrayList<Vert> paradas;
+    protected ArrayList<Vert> paradas = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class startmenu extends AppCompatActivity {
         openFragment(HomeFragment.newInstance("", ""));
         //end
 
-        paradas = inicializarvert();
+        inicializarvert();
 
         Log.d("aa","ENTRO EN EL ONCREATE");
     }
@@ -100,9 +100,8 @@ public class startmenu extends AppCompatActivity {
 
 
     //DIKSTRA ALGORITHM
-    public ArrayList<Vert> inicializarvert(){
+    public void inicializarvert(){
 
-        ArrayList<Vert> lista = new ArrayList<>();
         Map<String, Vert> vertexMap = new HashMap<String, Vert>();
 
         // Write a message to the database
@@ -133,36 +132,36 @@ public class startmenu extends AppCompatActivity {
                     Log.d("KEY", "key: " + entry.getKey() + "; value: " + entry.getValue());
 
                     Vert v = new Vert(entry.getKey().toString());
+                    Log.d("vvv", "vvv " + v);
                     //spinnerArray.add(entry.getKey().toString());
-                    lista.add(v);
-                    Log.d("Lista", "Lista " + lista.get(i));
+                    paradas.add(v);
+                    Log.d("Lista", "Lista " + paradas.get(i));
                     i++;
                 }
                 //Log.d("FIREBASEDB", "Value is: " + value.get("Hospital_clinic"));
 
-            }
+                myRef2.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for(DataSnapshot data : dataSnapshot.getChildren()) {
+                            String vFrom = data.child("FROM").getValue(String.class);
+                            String vTo = data.child("TO").getValue(String.class);
+                            float weight = data.child("WEIGHT").getValue(float.class);
+                            Log.d("aa", "+" + paradas.size());
+                            for (int i=0;i<paradas.size();i++){
+                                paradas.get(i).addNeighbour(new Edge(weight, vertexMap.get(vFrom), vertexMap.get(vTo)));
+                            }
+                            Log.d("FIREBASEDB", "FROM:" + vFrom + "; TO:" + vTo + "; WEIGHT;"+ weight);
+                        }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("FIREBASEDB", "Failed to read value.", error.toException());
-            }
-        });
-
-        myRef2.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot data : dataSnapshot.getChildren()) {
-                    String vFrom = data.child("FROM").getValue(String.class);
-                    String vTo = data.child("TO").getValue(String.class);
-                    float weight = data.child("WEIGHT").getValue(float.class);
-                    Log.d("aa", "+" + lista.size());
-                    for (int i=0;i<lista.size();i++){
-                        lista.get(i).addNeighbour(new Edge(weight, vertexMap.get(vFrom), vertexMap.get(vTo)));
                     }
-                    Log.d("FIREBASEDB", "FROM:" + vFrom + "; TO:" + vTo + "; WEIGHT;"+ weight);
-                }
 
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w("FIREBASEDB", "Failed to read value.", error.toException());
+                    }
+                });
             }
 
             @Override
@@ -173,7 +172,8 @@ public class startmenu extends AppCompatActivity {
         });
 
 
-        return lista;
+
+
     }
 
 }

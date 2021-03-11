@@ -1,6 +1,7 @@
 package com.team.projectcatalina.fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -10,10 +11,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -21,6 +25,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.team.projectcatalina.MainActivity;
 import com.team.projectcatalina.R;
+import com.team.projectcatalina.clases.Dijkstra;
 import com.team.projectcatalina.clases.Vert;
 import com.team.projectcatalina.clases.user;
 
@@ -50,7 +55,7 @@ public class HomeFragment extends Fragment {
 
     //dikstra algorithm
     private static Spinner station_dest;
-    protected ArrayList<Vert> parada;
+    protected ArrayList<Vert> paradas;
     protected ArrayList<Vert> spinnerarray;
     private int item;
     //end
@@ -96,7 +101,7 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
 
-            parada = (ArrayList<Vert>) getArguments().getSerializable("arrayParadas");
+            //paradas = (ArrayList<Vert>) getArguments().getSerializable("arrayParadas");
             //Log.d("aa","ENTRO AL oncreate de home: " + mParam1 + "tam" + getArguments().size() + "aa" + parada.get(0).getName());
         }
     }
@@ -121,7 +126,7 @@ public class HomeFragment extends Fragment {
         }
 
         if(getArguments()!=null){
-            parada = (ArrayList<Vert>) getArguments().getSerializable("arrayParadas");
+            paradas = (ArrayList<Vert>) getArguments().getSerializable("arrayParadas");
         }
 
         //Log.i("FIREBASED", "ff " + parada.get(0).getName());
@@ -130,11 +135,10 @@ public class HomeFragment extends Fragment {
         //mHashmap.put("VERDAGER/Estado", "DISPONIBLE");
         //mHashmap.put("DIAGONAL/Estado", "BLOQUEADA");
 
-        /* ArrayList<Vert> listado = inicializarvert();
         Vert.showverts(paradas);
 
-        for(int i=1;i<listado.size();i++){
-            listado.get(i).showwdges();
+        for(int i=1;i<paradas.size();i++){
+            paradas.get(i).showwdges();
 
             //importing stations for firebase
             //Log.i("logTes","chivato "+ listado.get(i));
@@ -142,15 +146,15 @@ public class HomeFragment extends Fragment {
         }
         //myRef.updateChildren(mHashmap);
 
-        for(int i=0;i<spinnerArray.size();i++){
-            Log.d("FIREBASED", "Paradas " + spinnerArray.get(i));
+        for(int i=0;i<paradas.size();i++){
+            Log.d("FIREBASED", "Paradas " + paradas.get(i));
         }
 
         //SPINNET CONFIG
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+        ArrayAdapter<Vert> adapter = new ArrayAdapter<Vert>(
                 getContext(),
                 android.R.layout.simple_spinner_item,
-                spinnerArray
+                paradas
 
                 //spinner array es la arraylist de la que se alimenta el spinner
         );
@@ -179,18 +183,18 @@ public class HomeFragment extends Fragment {
 
         //codigo del botton
         btn.setOnClickListener(v -> {
-            Dijkstra.ShortestP(listado.get(item));
-            Toast.makeText(getContext(),"TEXTO SELECCIONADO "+listado.get(item).toString(), Toast.LENGTH_SHORT).show();
+            Dijkstra.ShortestP(paradas.get(item));
+            Toast.makeText(getContext(),"TEXTO SELECCIONADO "+paradas.get(item).toString(), Toast.LENGTH_SHORT).show();
 
-            for(int i=0;i<listado.size();i++){
-                Log.i("logTest","paradas minimas "+ Dijkstra.getShortestP(listado.get(i)));
+            for(int i=0;i<paradas.size();i++){
+                Log.i("logTest","paradas minimas "+ Dijkstra.getShortestP(paradas.get(i)));
             }
-            Log.i("logTest","loged bottom "+ listado.get(item));
+            Log.i("logTest","loged bottom "+ paradas.get(item));
             Log.i("logTest","loged bottom pos "+ item);
 
 
         });
-        */
+
         return HomeFragment;
     }
 }
