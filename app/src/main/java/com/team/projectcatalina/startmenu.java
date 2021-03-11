@@ -20,6 +20,7 @@ import com.team.projectcatalina.clases.Edge;
 import com.team.projectcatalina.clases.Vert;
 import com.team.projectcatalina.clases.user;
 import com.team.projectcatalina.fragments.*;
+import com.team.projectcatalina.sp.sp_manager;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -44,7 +45,7 @@ public class startmenu extends AppCompatActivity {
         //nav menu
         bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
-        openFragment(HomeFragment.newInstance("", ""));
+        openFragment(HomeFragment.newInstance());
         //end
 
         inicializarvert();
@@ -79,10 +80,10 @@ public class startmenu extends AppCompatActivity {
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.navigation_home:
-                            openFragment(HomeFragment.newInstance("",""));
+                            openFragment(HomeFragment.newInstance());
                             return true;
                         case R.id.navigation_paradas:
-                            openFragment(ParadasFragment.newInstance("", ""));
+                            openFragment(ParadasFragment.newInstance());
                             return true;
                         case R.id.navigation_premium:
                             openFragment(premium.newInstance("", ""));
@@ -143,12 +144,12 @@ public class startmenu extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for(DataSnapshot data : dataSnapshot.getChildren()) {
-                            String vFrom = data.child("FROM").getValue(String.class);
-                            String vTo = data.child("TO").getValue(String.class);
+                            Vert vFrom = new Vert(data.child("FROM").getValue(String.class));
+                            Vert vTo = new Vert(data.child("TO").getValue(String.class));
                             float weight = data.child("WEIGHT").getValue(float.class);
                             Log.d("aa", "+" + paradas.size());
                             for (int i=0;i<paradas.size();i++){
-                                paradas.get(i).addNeighbour(new Edge(weight, vertexMap.get(vFrom), vertexMap.get(vTo)));
+                                paradas.get(i).addNeighbour(new Edge(weight, vFrom, vTo));
                             }
                             Log.d("FIREBASEDB", "FROM:" + vFrom + "; TO:" + vTo + "; WEIGHT;"+ weight);
                         }

@@ -39,17 +39,6 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-
     TextView name;
     GoogleSignInClient mGoogleSignInClient;
 
@@ -65,11 +54,9 @@ public class HomeFragment extends Fragment {
     }
 
     // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
+    public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -154,7 +141,6 @@ public class HomeFragment extends Fragment {
                 ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
                 Toast.makeText(getContext(),station_dest.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
                 item = station_dest.getSelectedItemPosition();
-
                 //destino
                 Toast.makeText(getContext(),"Pos lista: "+item, Toast.LENGTH_SHORT).show();
             }
@@ -170,7 +156,6 @@ public class HomeFragment extends Fragment {
         btn.setOnClickListener(v -> {
             Dijkstra.ShortestP(paradas.get(item));
             Toast.makeText(getContext(),"TEXTO SELECCIONADO "+paradas.get(item).toString(), Toast.LENGTH_SHORT).show();
-
             for(int i=0;i<paradas.size();i++){
                 Log.i("logTest","paradas minimas "+ Dijkstra.getShortestP(paradas.get(i)));
             }
@@ -179,7 +164,6 @@ public class HomeFragment extends Fragment {
 
 
         });
-
         return HomeFragment;
     }
 }
