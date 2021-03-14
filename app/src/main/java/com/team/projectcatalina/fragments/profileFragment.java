@@ -1,8 +1,6 @@
 package com.team.projectcatalina.fragments;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -33,13 +31,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.team.projectcatalina.MainActivity;
 import com.team.projectcatalina.R;
-import com.team.projectcatalina.clases.Edge;
-import com.team.projectcatalina.clases.Vert;
-import com.team.projectcatalina.clases.user;
 import com.team.projectcatalina.sp.sp_manager;
-import com.team.projectcatalina.startmenu;
 
-import java.security.AccessControlContext;
 import java.util.Map;
 
 public class profileFragment extends Fragment {

@@ -3,33 +3,21 @@ import androidx.annotation.NonNull;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.team.projectcatalina.clases.Dijkstra;
 import com.team.projectcatalina.clases.Edge;
 import com.team.projectcatalina.clases.Vert;
-import com.team.projectcatalina.clases.user;
 import com.team.projectcatalina.fragments.*;
-import com.team.projectcatalina.sp.sp_manager;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -63,20 +51,6 @@ public class startmenu extends AppCompatActivity {
         Log.d("aa","ENTRO AL ONRESUME");
     }
 
-    //bottom menu
-    public void openFragment(Fragment fragment) {
-        FragmentTransaction transaction = getSupportFragmentManager()
-                .beginTransaction();
-
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("arrayParadas", paradas);
-        fragment.setArguments(bundle);
-
-        transaction.replace(R.id.container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
-
     BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -101,6 +75,20 @@ public class startmenu extends AppCompatActivity {
                     return false;
                 }
             };
+
+    //bottom menu
+    public void openFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager()
+                .beginTransaction();
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("arrayParadas", paradas);
+        fragment.setArguments(bundle);
+
+        transaction.replace(R.id.container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 
 
     //DIKSTRA ALGORITHM

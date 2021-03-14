@@ -1,9 +1,6 @@
 package com.team.projectcatalina.fragments;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,13 +20,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.team.projectcatalina.MainActivity;
 import com.team.projectcatalina.R;
 import com.team.projectcatalina.clases.Dijkstra;
 import com.team.projectcatalina.clases.Vert;
-import com.team.projectcatalina.clases.user;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -61,17 +53,6 @@ public class HomeFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-    
-    /*
-    public static HomeFragment newInstance(ArrayList<Vert> arraypar) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putSerializable("ArrayParadas", arraypar);
-        fragment.setArguments(args);
-
-        return fragment;
-    }*/
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -97,12 +78,10 @@ public class HomeFragment extends Fragment {
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(getContext(), gso);
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getContext());
-        user usr = new user();
+
         if (acct != null) {
-            usr.setid(acct.getId());
             user_name.setText("Hola!, "+acct.getGivenName());
         }
-
 
         //Log.i("FIREBASED", "ff " + parada.get(0).getName());
 
@@ -130,8 +109,6 @@ public class HomeFragment extends Fragment {
                 getContext(),
                 android.R.layout.simple_spinner_item,
                 paradas
-
-                //spinner array es la arraylist de la que se alimenta el spinner
         );
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -165,8 +142,8 @@ public class HomeFragment extends Fragment {
             Log.i("logTest","loged bottom "+ paradas.get(item));
             Log.i("logTest","loged bottom pos "+ item);
 
-
         });
+
         return HomeFragment;
     }
 }
