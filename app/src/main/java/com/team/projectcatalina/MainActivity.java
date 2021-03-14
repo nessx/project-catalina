@@ -1,6 +1,7 @@
 package com.team.projectcatalina;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
@@ -12,6 +13,8 @@ import android.text.Html;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         mAuth = FirebaseAuth.getInstance();
         s_preferences = new sp_manager(getApplicationContext());
 

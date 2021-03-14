@@ -1,5 +1,6 @@
 package com.team.projectcatalina.fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -78,6 +79,7 @@ public class HomeFragment extends Fragment {
         if (getArguments() != null) {
             Log.d("aa","ENTRO AL oncreate de home");
             paradas = (ArrayList<Vert>) getArguments().getSerializable("arrayParadas");
+
             //Log.d("aa","ENTRO AL oncreate de home: " + mParam1 + "tam" + getArguments().size() + "aa" + parada.get(0).getName());
         }
     }
@@ -100,6 +102,7 @@ public class HomeFragment extends Fragment {
             usr.setid(acct.getId());
             user_name.setText("Hola!, "+acct.getGivenName());
         }
+
 
         //Log.i("FIREBASED", "ff " + parada.get(0).getName());
 

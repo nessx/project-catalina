@@ -42,13 +42,14 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textColor="#000000"
+        app:iconTint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.273"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.227"
-        app:iconTint="#000000"/>
+        app:layout_constraintVertical_bias="0.227" />
 
     <EditText
         android:id="@+id/EditTextReasonReport"
@@ -56,13 +57,14 @@
         android:layout_height="167dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textColor="#000000"
+        app:iconTint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.474"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.553"
-        app:iconTint="#000000"/>
+        app:layout_constraintVertical_bias="0.553" />
 
     <Button
         android:id="@+id/button2"

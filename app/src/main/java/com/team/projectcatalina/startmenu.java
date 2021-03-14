@@ -9,6 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -46,10 +50,9 @@ public class startmenu extends AppCompatActivity {
         bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
         openFragment(HomeFragment.newInstance());
-        //end
 
         inicializarvert();
-
+        //end
         Log.d("aa","ENTRO EN EL ONCREATE");
     }
 
@@ -108,13 +111,11 @@ public class startmenu extends AppCompatActivity {
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("SECURE_TRANSPORT/Estaciones");
-        Log.i("hola", String.valueOf(myRef));
-
         DatabaseReference myRef2 = database.getReference("SECURE_TRANSPORT/NODOS");
 
+        /*
         //Writing Hashmap
         Map<String, Object> mHashmap = new HashMap<>();
-        /*
         mHashmap.put("nodo"+i+"/FROM", vertexMap.get(vFrom).toString());
         mHashmap.put("nodo"+i+"/TO", vertexMap.get(vTo).toString());
         mHashmap.put("nodo"+i+"/WEIGHT", weight);
@@ -133,7 +134,6 @@ public class startmenu extends AppCompatActivity {
                     Log.d("KEY", "key: " + entry.getKey() + "; value: " + entry.getValue());
 
                     Vert v = new Vert(entry.getKey().toString());
-                    //spinnerArray.add(entry.getKey().toString());
                     paradas.add(v);
                     Log.d("Lista", "Lista " + paradas.get(i));
                     i++;
@@ -170,9 +170,6 @@ public class startmenu extends AppCompatActivity {
                 Log.w("FIREBASEDB", "Failed to read value.", error.toException());
             }
         });
-
-
-
 
     }
 

@@ -1,12 +1,15 @@
 package com.team.projectcatalina.fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,10 +26,21 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.team.projectcatalina.MainActivity;
 import com.team.projectcatalina.R;
+import com.team.projectcatalina.clases.Edge;
+import com.team.projectcatalina.clases.Vert;
+import com.team.projectcatalina.clases.user;
 import com.team.projectcatalina.sp.sp_manager;
 import com.team.projectcatalina.startmenu;
+
+import java.security.AccessControlContext;
+import java.util.Map;
 
 public class profileFragment extends Fragment {
 
@@ -42,15 +56,13 @@ public class profileFragment extends Fragment {
     GoogleSignInClient mGoogleSignInClient;
     sp_manager s_preferences;
     Button sign_out;
-    TextView name;
-    TextView email;
-    TextView id;
+    TextView name, email, id, accountype;
     ImageView profile_photo;
 
-    public static String personName;
-    public static String personEmail;
-    public static String personId;
-    public static Uri personPhoto;
+    private static String personName;
+    private static String personEmail;
+    private static String personId;
+    private static Uri personPhoto;
 
     public profileFragment() {
         // Required empty public constructor
@@ -83,11 +95,9 @@ public class profileFragment extends Fragment {
         name = profile.findViewById(R.id.name);
         email = profile.findViewById(R.id.mail);
         id = profile.findViewById(R.id.id);
+        accountype = profile.findViewById(R.id.accountype);
         profile_photo = profile.findViewById(R.id.profile_photo);
         s_preferences = new sp_manager(getContext());
-        startmenu sm = new startmenu();
-
-
 
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -109,6 +119,27 @@ public class profileFragment extends Fragment {
         name.setText(personName);
         email.setText(personEmail);
         id.setText("Google id: "+personId);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("SECURE_TRANSPORT/USERS");
+        reference.child(acct.getId()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Map<String, Object> value = (Map<String, Object>) dataSnapshot.getValue();
+
+                if(value.get("PREMIUM").toString().equals("1")){
+                    accountype.setText("CUENTA PREMIUM 🌟");
+                }else{
+                    accountype.setText("CUENTA GRATUITA");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("FIREBASEDB", "Failed to read value.", error.toException());
+            }
+        });
 
         RequestOptions options = new RequestOptions()
                 .centerCrop()
