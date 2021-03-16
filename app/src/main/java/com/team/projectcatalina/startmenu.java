@@ -144,12 +144,12 @@ public class startmenu extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot data : dataSnapshot.getChildren()) {
-                    String vFrom = data.child("FROM").getValue(String.class);
-                    String vTo = data.child("TO").getValue(String.class);
+                    Vert vFrom = new Vert(data.child("FROM").getValue(String.class));
+                    Vert vTo = new Vert(data.child("TO").getValue(String.class));
                     float weight = data.child("WEIGHT").getValue(float.class);
                     Log.d("aa", "+" + paradas.size());
                     for (int i=0;i<paradas.size();i++){
-                        paradas.get(i).addNeighbour(new Edge(weight, vertexMap.get(vFrom), vertexMap.get(vTo)));
+                        paradas.get(i).addNeighbour(new Edge(weight, vFrom, vTo));
                     }
                     Log.d("FIREBASEDB", "FROM:" + vFrom + "; TO:" + vTo + "; WEIGHT;"+ weight);
                 }
