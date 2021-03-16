@@ -48,7 +48,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public int getItemCount() {
         return array_paradas.size();
     }
-
+/*
     public String Query (){
         Query estado =
                 FirebaseDatabase.getInstance().getReference()
@@ -58,27 +58,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         String estadoS = estado.toString();
         Log.i("ESTADOS", "estado? " + estadoS);
         return estadoS;
-    }
-    public void Querynessx(){
-        DatabaseReference reference = database.getReference("SECURE_TRANSPORT/Estaciones/");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                int i = 0;
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    String parada = data.getKey();
-                    String status = data.child("Estado").getValue(String.class);
-                    Log.d("ESTADOS", "ESTADO:" + status + "; PARADA:" +parada+" VALOR DE I "+i);
-                    i++;
-                }
-            }
+    }*/
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView etiquetaNom,estado;
@@ -87,11 +68,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             estado = itemView.findViewById(R.id.estado);
-            if (Query() == "DISPONIBLE"){
-                estado.setBackgroundResource(R.drawable.circle_green);
-            }else {
-                estado.setBackgroundResource(R.drawable.circle_red);
-            }
             etiquetaNom = itemView.findViewById(R.id.itemListIncidencia);
             layout = itemView.findViewById(R.id.layout);
         }
