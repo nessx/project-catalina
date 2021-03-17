@@ -63,6 +63,9 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0-alpha10'
 
     //profile
-    //implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //FRAGMENTDIALOG
+    implementation 'com.github.javiersantos:MaterialStyledDialogs:3.0.1'
+
 }

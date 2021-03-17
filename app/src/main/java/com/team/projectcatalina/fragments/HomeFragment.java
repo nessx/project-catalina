@@ -134,6 +134,7 @@ public class HomeFragment extends Fragment {
 
         //codigo del botton
         btn.setOnClickListener(v -> {
+            Log.i("NESTOR","GOTO  "+ paradas.get(item));
             Dijkstra.ShortestP(paradas.get(item));
             Toast.makeText(getContext(),"TEXTO SELECCIONADO "+paradas.get(item).toString(), Toast.LENGTH_SHORT).show();
             for(int i=0;i<paradas.size();i++){

@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
+import com.github.javiersantos.materialstyleddialogs.enums.Style;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.database.DataSnapshot;
@@ -101,6 +103,7 @@ public class premium extends Fragment {
                                     String personId = acct.getId();
                                     mHashmap.put(personId+"/PREMIUM", 1);
                                     myRef.updateChildren(mHashmap);
+
                                 }
 
                                 @Override
