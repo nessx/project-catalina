@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.team.projectcatalina.clases.Edge;
+import com.team.projectcatalina.clases.Estacion;
 import com.team.projectcatalina.clases.Vert;
 import com.team.projectcatalina.fragments.*;
 
@@ -112,10 +113,20 @@ public class startmenu extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Map<String, Object> value = (Map<String, Object>) dataSnapshot.getValue();
+
+
                 int i = 0;
+
                 for (Map.Entry entry : value.entrySet()) {
                     Log.d("KEY", "key: " + entry.getKey() + "; value: " + entry.getValue());
                     Vert v = new Vert(entry.getKey().toString());
+
+                    //Estacion y nombre
+                    Estacion est = new Estacion(entry.getKey().toString(),entry.getValue().toString() );
+                    ArrayList<Estacion> arr_estaciones = new ArrayList<>();
+                    arr_estaciones.add(est);
+                    Log.d("ESTADOS", "ESTADO:" + est.getEstado() + "; PARADA:" +est.getName());
+
                     //spinnerArray.add(entry.getKey().toString());
                     paradas.add(v);
                     Log.i("provesMarta", "Lista " + paradas.get(i));

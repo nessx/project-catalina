@@ -5,21 +5,20 @@ public class Estacion {
     private String Estado;
 
     public Estacion() {
+        //constructor
+    }
+
+    public Estacion(String nombre, String estado) {
+        this.Name = nombre;
+        this.Estado = estado;
     }
 
     public String getName() {
         return Name;
     }
-
-    public void setName(String name) {
-        Name = name;
-    }
-
     public String getEstado() {
         return Estado;
     }
-
-    public void setEstado(String estado) {
-        Estado = estado;
-    }
 }
+
+

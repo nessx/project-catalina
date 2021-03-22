@@ -50,46 +50,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return array_paradas.size();
     }
 
-    public void Query (){
-        /*database.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                    String parada = dataSnapshot.getKey();
-                    String status = dataSnapshot.child("Estado").getValue(String.class);
-                    Log.d("ESTADOS", "ESTADO:" + status + "; PARADA:" + parada);
-                    if (status == "DISPONIBLE") {
-                        estado.setBackgroundResource(R.drawable.circle_green);
-                    } else {
-                        estado.setBackgroundResource(R.drawable.circle_red);
-                    }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });*/
-        Query query = database.orderByKey();
-        query.addValueEventListener(new ValueEventListener(){
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String parada = dataSnapshot.getKey();
-                String status = dataSnapshot.child("Estado").getValue(String.class);
-                Log.d("ESTADOS", "ESTADO:" + status + "; PARADA:" + parada);
-                if (status == "DISPONIBLE") {
-                    estado.setBackgroundResource(R.drawable.circle_green);
-                } else {
-                    estado.setBackgroundResource(R.drawable.circle_red);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
     /*public void Querynessx(){
         DatabaseReference reference = database.getReference("SECURE_TRANSPORT/Estaciones/");
         reference.addValueEventListener(new ValueEventListener() {
@@ -114,15 +74,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView etiquetaNom;
         CardView layout;
+        Estacion est = new Estacion();
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             estado = itemView.findViewById(R.id.estado);
-            Query();
+            Log.d("Est", "Est es:" + est.getEstado());
+            if (est.getEstado().equals("DISPONIBLE")) {
+                estado.setBackgroundResource(R.drawable.circle_green);
+            } else {
+                estado.setBackgroundResource(R.drawable.circle_red);
+            }
+
             etiquetaNom = itemView.findViewById(R.id.itemListIncidencia);
             layout = itemView.findViewById(R.id.layout);
         }
     }
-    
 
 }
