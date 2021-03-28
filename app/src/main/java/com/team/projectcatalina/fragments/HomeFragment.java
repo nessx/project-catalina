@@ -27,6 +27,7 @@ import com.team.projectcatalina.clases.Dijkstra;
 import com.team.projectcatalina.clases.Vert;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -151,6 +152,7 @@ public class HomeFragment extends Fragment {
             }
 
             List<Vert> path = Dijkstra.getShortestP(paradas.get(from));
+            Collections.reverse(path);
             Log.i("TRACE","loged bottom pos "+ path);
 
             Log.i("logTest","loged bottom "+ paradas.get(to));
