@@ -63,8 +63,6 @@ public class HomeFragment extends Fragment {
         if (getArguments() != null) {
             Log.d("aa","ENTRO AL oncreate de home");
             paradas = (ArrayList<Vert>) getArguments().getSerializable("arrayParadas");
-
-            //Log.d("aa","ENTRO AL oncreate de home: " + mParam1 + "tam" + getArguments().size() + "aa" + parada.get(0).getName());
         }
     }
 
@@ -89,22 +87,11 @@ public class HomeFragment extends Fragment {
             user_name.setText("Hola!, "+acct.getGivenName());
         }
 
-        //Log.i("FIREBASED", "ff " + parada.get(0).getName());
-
-        //mHashmap.put("ESPANYA/Estado", "DISPONIBLE");
-        //mHashmap.put("VERDAGER/Estado", "DISPONIBLE");
-        //mHashmap.put("DIAGONAL/Estado", "BLOQUEADA");
-
         Vert.showverts(paradas);
 
         for(int i=1;i<paradas.size();i++){
             paradas.get(i).showwdges();
-
-            //importing stations for firebase
-            //Log.i("logTes","chivato "+ listado.get(i));
-            //mHashmap.put(listado.get(i)+"/Estado", "DISPONIBLE");
         }
-        //myRef.updateChildren(mHashmap);
 
         for(int i=0;i<paradas.size();i++){
             Log.d("FIREBASED", "Paradas " + paradas.get(i));
@@ -179,7 +166,6 @@ public class HomeFragment extends Fragment {
                         }
                     })
                     .show();
-
         });
 
         return HomeFragment;

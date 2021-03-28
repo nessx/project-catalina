@@ -19,6 +19,10 @@ import com.team.projectcatalina.clases.Estacion;
 import com.team.projectcatalina.clases.Vert;
 import com.team.projectcatalina.fragments.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,13 +32,15 @@ public class startmenu extends AppCompatActivity {
     BottomNavigationView bottomNavigation;
 
     private static List<String> spinnerArray;
-    protected ArrayList<Vert> paradas;
+    protected ArrayList<Vert> paradas;  // <- firebase
+    protected ArrayList<Vert> parada; // <- archivo txt
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_menu);
         paradas = new ArrayList<Vert>();
+        parada = inicializarver();
 
         //nav menu
         bottomNavigation = findViewById(R.id.bottom_navigation);
@@ -42,7 +48,6 @@ public class startmenu extends AppCompatActivity {
         //end
 
         inicializarvert();
-
     }
 
 
@@ -58,7 +63,9 @@ public class startmenu extends AppCompatActivity {
                 .beginTransaction();
 
         Bundle bundle = new Bundle();
-        bundle.putSerializable("arrayParadas", paradas);
+        //la verdadera arraylist es "paradas", parada es cogiendola del archivo
+        //bundle.putSerializable("arrayParadas", paradas); <- firebase
+        bundle.putSerializable("arrayParadas", parada);
         fragment.setArguments(bundle);
 
         transaction.replace(R.id.container, fragment);
@@ -97,17 +104,6 @@ public class startmenu extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("SECURE_TRANSPORT/Estaciones");
 
-        //Writing Hashmap
-        Map<String, Object> mHashmap = new HashMap<>();
-        /*
-        mHashmap.put("nodo"+i+"/FROM", vertexMap.get(vFrom).toString());
-        mHashmap.put("nodo"+i+"/TO", vertexMap.get(vTo).toString());
-        mHashmap.put("nodo"+i+"/WEIGHT", weight);
-        myRef.updateChildren(mHashmap);
-         */
-
-        //Log.i("logTes","chivato "+ listado.get(i));
-
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -123,14 +119,12 @@ public class startmenu extends AppCompatActivity {
                     Estacion est = new Estacion(entry.getKey().toString(),entry.getValue().toString() );
                     Log.d("ESTADOS", "ESTADO:" + est.getEstado() + "; PARADA:" +est.getName());
 
-                    //spinnerArray.add(entry.getKey().toString());
                     paradas.add(v);
 
                     Log.i("provesMarta", "Lista " + paradas.get(i));
                     i++;
                     Log.i("provesMarta", "" + paradas.size());
                 }
-                //Log.d("FIREBASEDB", "Value is: " + value.get("Hospital_clinic"));
                 addNei();
             }
 
@@ -152,18 +146,20 @@ public class startmenu extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot data : dataSnapshot.getChildren()) {
-                    String vertexId = data.child("FROM").getValue(String.class);
-                    String vertexName = data.child("TO").getValue(String.class);
-                    float weight = data.child("WEIGHT").getValue(float.class);
-                    Vert v = new Vert(vertexName);
-                    vertexMap.put(vertexId, v);
+
+                    String vFrom = data.child("FROM").getValue(String.class);
+                    String vTo = data.child("TO").getValue(String.class);
+                    double weight = data.child("WEIGHT").getValue(double.class);
+
+                    Vert v = new Vert(vFrom);
+                    vertexMap.put(vTo, v);
 
                     if (v != null) {
-                        v.addNeighbour(new Edge(weight, vertexMap.get(vertexId), vertexMap.get(vertexName)));
+                        v.addNeighbour(new Edge(weight, vertexMap.get(vFrom), vertexMap.get(vTo)));
                     }
 
                     Log.d("aa", "+" + paradas.size());
-                    Log.d("FIREBASEDB", "FROM:" + vertexId + "; TO:" + vertexName + "; WEIGHT;"+ weight);
+                    Log.d("FIREBASEDB", "FROM:" + vFrom + "; TO:" + vTo + "; WEIGHT;"+ weight);
                 }
                 openFragment(HomeFragment.newInstance());
             }
@@ -175,5 +171,66 @@ public class startmenu extends AppCompatActivity {
             }
         });
         Log.i("provesMarta", "" + paradas.size());
+    }
+
+
+
+    //DIKSTRA ALGORITHM
+    //probando con el archivo txt por que con firebase no funciona
+    public ArrayList<Vert> inicializarver(){
+        ArrayList<Vert> lista = new ArrayList<>();
+
+        Map<String, Vert> vertexMap = new HashMap<String, Vert>();
+        BufferedReader in = null;
+
+        try {
+            URL url = new URL("http://indomablesrp.online/file.txt");
+            in = new BufferedReader(new InputStreamReader(url.openStream()));
+            String line;
+            boolean inVertex = true;
+
+            while ((line = in.readLine()) != null) {
+                if (line.charAt(0) == '#') {
+                    inVertex = false;
+                    continue;
+                }
+                if (inVertex) {
+                    //store the vertices
+                    int indexOfSpace = line.indexOf(' ');
+                    String vertexId = line.substring(0, indexOfSpace);
+                    String vertexName = line.substring(indexOfSpace + 1);
+                    Vert v = new Vert(vertexName);
+                    lista.add(v);
+                    vertexMap.put(vertexId, v);
+
+                    //adding items for the spinner
+                    //spinnerArray.add(vertexId);
+
+                } else {
+                    //store the edges
+                    String[] parts = line.split(" ");
+
+                    String vFrom = parts[0];
+                    String vTo = parts[1];
+                    double weight = Double.parseDouble(parts[2]);
+
+                    Vert v = vertexMap.get(vFrom);
+                    if (v != null) {
+                        v.addNeighbour(new Edge(weight, vertexMap.get(vFrom), vertexMap.get(vTo)));
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally{
+            if(in!= null)
+                try {
+                    in.close();
+                } catch (IOException ignore) {
+                    ignore.printStackTrace();
+                }
+        }
+        return lista;
     }
 }

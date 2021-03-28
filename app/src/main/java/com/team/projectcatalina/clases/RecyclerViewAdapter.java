@@ -50,27 +50,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return array_paradas.size();
     }
 
-    /*public void Querynessx(){
-        DatabaseReference reference = database.getReference("SECURE_TRANSPORT/Estaciones/");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                int i = 0;
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    String parada = data.getKey();
-                    String status = data.child("Estado").getValue(String.class);
-                    Log.d("ESTADOS", "ESTADO:" + status + "; PARADA:" +parada+" VALOR DE I "+i);
-                    i++;
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }*/
-
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView etiquetaNom;
         CardView layout;
