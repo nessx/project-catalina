@@ -159,12 +159,12 @@ public class HomeFragment extends Fragment {
             Dijkstra.getShortestP(paradas.get(from));
             Dijkstra.ShortestP(paradas.get(to));
 
-            List<Vert> path = Dijkstra.getShortestP(paradas.get(from));
-            Log.i("TRACE","loged bottom pos "+ path);
-
             for(int i=0;i<paradas.size();i++){
                 Log.i("logTest","paradas minimas "+ Dijkstra.getShortestP(paradas.get(from)));
             }
+
+            List<Vert> path = Dijkstra.getShortestP(paradas.get(from));
+            Log.i("TRACE","loged bottom pos "+ path);
 
             Log.i("logTest","loged bottom "+ paradas.get(to));
             Log.i("logTest","loged bottom pos "+ to);
