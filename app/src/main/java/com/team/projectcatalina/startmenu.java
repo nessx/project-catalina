@@ -155,14 +155,18 @@ public class startmenu extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot data : dataSnapshot.getChildren()) {
-                    Vert vFrom = new Vert(data.child("FROM").getValue(String.class));
-                    Vert vTo = new Vert(data.child("TO").getValue(String.class));
+                    String vertexId = data.child("FROM").getValue(String.class);
+                    String vertexName = data.child("TO").getValue(String.class);
                     float weight = data.child("WEIGHT").getValue(float.class);
-                    Log.d("aa", "+" + paradas.size());
-                    for (int i=0;i<paradas.size();i++){
-                        paradas.get(i).addNeighbour(new Edge(weight, vFrom, vTo));
+                    Vert v = new Vert(vertexName);
+                    vertexMap.put(vertexId, v);
+
+                    if (v != null) {
+                        v.addNeighbour(new Edge(weight, vertexMap.get(vertexId), vertexMap.get(vertexName)));
                     }
-                    Log.d("FIREBASEDB", "FROM:" + vFrom + "; TO:" + vTo + "; WEIGHT;"+ weight);
+
+                    Log.d("aa", "+" + paradas.size());
+                    Log.d("FIREBASEDB", "FROM:" + vertexId + "; TO:" + vertexName + "; WEIGHT;"+ weight);
                 }
                 openFragment(HomeFragment.newInstance());
             }
