@@ -1,5 +1,7 @@
 package com.team.projectcatalina.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -25,6 +27,7 @@ import com.team.projectcatalina.clases.Dijkstra;
 import com.team.projectcatalina.clases.Vert;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -156,7 +159,8 @@ public class HomeFragment extends Fragment {
             Dijkstra.getShortestP(paradas.get(from));
             Dijkstra.ShortestP(paradas.get(to));
 
-            Toast.makeText(getContext(),"TEXTO SELECCIONADO "+paradas.get(to).toString(), Toast.LENGTH_SHORT).show();
+            List<Vert> path = Dijkstra.getShortestP(paradas.get(from));
+            Log.i("TRACE","loged bottom pos "+ path);
 
             for(int i=0;i<paradas.size();i++){
                 Log.i("logTest","paradas minimas "+ Dijkstra.getShortestP(paradas.get(from)));
@@ -164,6 +168,17 @@ public class HomeFragment extends Fragment {
 
             Log.i("logTest","loged bottom "+ paradas.get(to));
             Log.i("logTest","loged bottom pos "+ to);
+
+            AlertDialog alertDialog = new AlertDialog.Builder(getContext())
+                    .setTitle("TRAYECTO")
+                    .setMessage(path.toString())
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //set what would happen when positive button is clicked
+                        }
+                    })
+                    .show();
 
         });
 
