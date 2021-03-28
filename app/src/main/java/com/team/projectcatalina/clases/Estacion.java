@@ -1,5 +1,7 @@
 package com.team.projectcatalina.clases;
 
+import java.util.ArrayList;
+
 public class Estacion {
     private String Name;
     private String Estado;
@@ -20,5 +22,6 @@ public class Estacion {
         return Estado;
     }
 }
+
 
 

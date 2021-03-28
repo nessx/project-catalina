@@ -36,10 +36,10 @@ public class HomeFragment extends Fragment {
     GoogleSignInClient mGoogleSignInClient;
 
     //dikstra algorithm
-    private static Spinner station_dest;
+    private static Spinner station_dest, station_start;
     protected ArrayList<Vert> paradas;
     protected ArrayList<Vert> spinnerarray;
-    private int item;
+    private int from,to;
     //end
 
     public HomeFragment() {
@@ -70,7 +70,10 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View HomeFragment = inflater.inflate(R.layout.fragment_home, container, false);
 
+        //spinner get data
         station_dest = HomeFragment.findViewById(R.id.destination);
+        station_start = HomeFragment.findViewById(R.id.start);
+
         Button btn = HomeFragment.findViewById(R.id.button);
         TextView user_name = HomeFragment.findViewById(R.id.name);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -110,8 +113,26 @@ public class HomeFragment extends Fragment {
                 android.R.layout.simple_spinner_item,
                 paradas
         );
-
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        //STARTING STOPS
+        station_start.setPrompt("Selecciona lugar de inicio");
+        station_start.setAdapter(adapter);
+        station_start.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
+                ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
+                Toast.makeText(getContext(),station_start.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
+                from = station_start.getSelectedItemPosition();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //FINISH STOPS
         station_dest.setPrompt("Selecciona lugar de destino");
         station_dest.setAdapter(adapter);
 
@@ -120,9 +141,7 @@ public class HomeFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id){
                 ((TextView) parent.getChildAt(0)).setTextColor(Color.BLACK);
                 Toast.makeText(getContext(),station_dest.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
-                item = station_dest.getSelectedItemPosition();
-                //destino
-                Toast.makeText(getContext(),"Pos lista: "+item, Toast.LENGTH_SHORT).show();
+                to = station_dest.getSelectedItemPosition();
             }
 
             @Override
@@ -134,14 +153,17 @@ public class HomeFragment extends Fragment {
 
         //codigo del botton
         btn.setOnClickListener(v -> {
-            Log.i("NESTOR","GOTO  "+ paradas.get(item));
-            Dijkstra.ShortestP(paradas.get(item));
-            Toast.makeText(getContext(),"TEXTO SELECCIONADO "+paradas.get(item).toString(), Toast.LENGTH_SHORT).show();
+            Dijkstra.getShortestP(paradas.get(from));
+            Dijkstra.ShortestP(paradas.get(to));
+
+            Toast.makeText(getContext(),"TEXTO SELECCIONADO "+paradas.get(to).toString(), Toast.LENGTH_SHORT).show();
+
             for(int i=0;i<paradas.size();i++){
-                Log.i("logTest","paradas minimas "+ Dijkstra.getShortestP(paradas.get(i)));
+                Log.i("logTest","paradas minimas "+ Dijkstra.getShortestP(paradas.get(from)));
             }
-            Log.i("logTest","loged bottom "+ paradas.get(item));
-            Log.i("logTest","loged bottom pos "+ item);
+
+            Log.i("logTest","loged bottom "+ paradas.get(to));
+            Log.i("logTest","loged bottom pos "+ to);
 
         });
 

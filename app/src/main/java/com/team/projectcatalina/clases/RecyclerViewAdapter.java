@@ -79,12 +79,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             estado = itemView.findViewById(R.id.estado);
+            /*
             Log.d("Est", "Est es:" + est.getEstado());
             if (est.getEstado().equals("DISPONIBLE")) {
                 estado.setBackgroundResource(R.drawable.circle_green);
             } else {
                 estado.setBackgroundResource(R.drawable.circle_red);
-            }
+            }*/
 
             etiquetaNom = itemView.findViewById(R.id.itemListIncidencia);
             layout = itemView.findViewById(R.id.layout);

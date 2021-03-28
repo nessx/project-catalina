@@ -113,8 +113,6 @@ public class startmenu extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Map<String, Object> value = (Map<String, Object>) dataSnapshot.getValue();
-
-
                 int i = 0;
 
                 for (Map.Entry entry : value.entrySet()) {
@@ -123,12 +121,11 @@ public class startmenu extends AppCompatActivity {
 
                     //Estacion y nombre
                     Estacion est = new Estacion(entry.getKey().toString(),entry.getValue().toString() );
-                    ArrayList<Estacion> arr_estaciones = new ArrayList<>();
-                    arr_estaciones.add(est);
                     Log.d("ESTADOS", "ESTADO:" + est.getEstado() + "; PARADA:" +est.getName());
 
                     //spinnerArray.add(entry.getKey().toString());
                     paradas.add(v);
+
                     Log.i("provesMarta", "Lista " + paradas.get(i));
                     i++;
                     Log.i("provesMarta", "" + paradas.size());
